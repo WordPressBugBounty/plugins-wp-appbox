@@ -13,7 +13,7 @@ global $wpdb;
 
 define( 'WPAPPBOX_MIN_PHPVERSION', '5.3' );
 define( 'WPAPPBOX_PLUGIN_NAME', 'WP-Appbox' ); 
-define( 'WPAPPBOX_PLUGIN_VERSION', '4.5.2' );
+define( 'WPAPPBOX_PLUGIN_VERSION', '4.5.3' );
 define( 'WPAPPBOX_DB_VERSION', '1.0.4' );
 define( 'WPAPPBOX_PREFIX', 'wpAppbox_' );
 define( 'WPAPPBOX_TABLE_NAME', 'appbox' );
