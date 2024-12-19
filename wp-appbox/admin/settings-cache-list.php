@@ -349,7 +349,7 @@ class Cached_Apps extends WP_List_Table {
 	* Zelle für den App-Titel erstellen
 	*
 	* @since   2.0.0
-	* @change  4.4.0
+	* @change  4.5.4
 	*/
 	
 	function column_app_title( $item ) {
@@ -363,15 +363,15 @@ class Cached_Apps extends WP_List_Table {
 		if ( isset($_GET['order'] ) ) {
 			$getparam .= '&order=' . sanitize_text_field( $_GET['order'] );
 		}
-		$getparam = esc_url( $getparam );
+		$getparam = esc_attr( $getparam );
 		$isDeprecated = ( $item['app_deprecated'] == '1' ? '<span style="color:red;text-transform:uppercase;">' . __('Deprecated', 'wp-appbox') . '</span> ' : ''); 
 	  	$actions = array( 
 	  		'goto' => '<a target="_blank" href="'. esc_attr( $item['app_store_url'] ) . '">' . __('Go to Store', 'wp-appbox') . '</a>',
-	  		'reload' => sprintf( '<a href="?page=%s&action=%s&tab=cache-list' . $getparam . '&app_cache_id=%s&wpappbox_reload_cache">' . __('Force refresh cache', 'wp-appbox') . '</a>', sanitize_text_field( $_REQUEST['page'] ), 'reload', sanitize_text_field( $item['app_cache_id'] ) ),
-	  		'delete' => sprintf( '<a href="?page=%s&action=%s&tab=cache-list' . $getparam . '&app_cache_id=%s">' . __('Delete', 'wp-appbox') . '</a>', sanitize_text_field( $_REQUEST['page'] ), 'delete', sanitize_text_field( $item['app_cache_id'] ) )
+	  		'reload' => sprintf( '<a href="?page=%s&action=%s&tab=cache-list' . $getparam . '&app_cache_id=%s&wpappbox_reload_cache">' . __('Force refresh cache', 'wp-appbox') . '</a>', sanitize_text_field( esc_attr( $_GET['page'] ) ), 'reload', sanitize_text_field( esc_attr( $item['app_cache_id'] ) ) ),
+	  		'delete' => sprintf( '<a href="?page=%s&action=%s&tab=cache-list' . $getparam . '&app_cache_id=%s">' . __('Delete', 'wp-appbox') . '</a>', sanitize_text_field( esc_attr( $_GET['page'] ) ), 'delete', sanitize_text_field( esc_attr( $item['app_cache_id'] ) ) )
 	  	);
 	  	if ( 1 == $item['app_deprecated'] ) {
-	  		$actions['delete'] = sprintf( '<a href="?page=%s&action=%s&tab=cache-list' . $getparam . '&app_cache_id=%s" onClick="return confirm(\'' . __('This app is deprecated. If you delete this app, all data and images will be permanently deleted. Are you sure?', 'wp-appbox') . '\')">' . __('Delete', 'wp-appbox') . '</a>', sanitize_text_field( $_REQUEST['page'] ), 'delete', sanitize_text_field( $item['app_cache_id'] ) );
+	  		$actions['delete'] = sprintf( '<a href="?page=%s&action=%s&tab=cache-list' . $getparam . '&app_cache_id=%s" onClick="return confirm(\'' . __('This app is deprecated. If you delete this app, all data and images will be permanently deleted. Are you sure?', 'wp-appbox') . '\')">' . __('Delete', 'wp-appbox') . '</a>', sanitize_text_field( esc_attr( $_GET['page'] ) ), 'delete', sanitize_text_field( esc_attr( $item['app_cache_id'] ) ) );
 	  	}
 	  	return( sprintf( '%1$s %2$s', $isDeprecated.esc_attr( $item['app_title'] ), $this->row_actions( $actions ) ) );
 	}

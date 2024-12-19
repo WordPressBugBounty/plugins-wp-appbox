@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: WP-Appbox
-Version: 4.5.3
+Version: 4.5.4
 Plugin URI: https://tchgdns.de/wp-appbox-app-badge-fuer-google-play-mac-app-store-windows-store-windows-phone-store-co/
 Description: With WP-Appbox you can add beautiful mobile app badges to your WordPress posts and pages simply by adding a shortcode.
 Author: Marcel Schmilgeit
@@ -79,12 +79,12 @@ if ( !is_admin() ) {
 * Laden der Sprachpakete
 *
 * @since   1.0.0
-* @change  n/a
+* @change  4.5.4
 */
 function wpAppbox_loadTextdomain() {
-	load_plugin_textdomain( 'wp-appbox', false, basename( dirname( __FILE__ ) ) . '/lang' );
+	load_plugin_textdomain( 'wp-appbox', false, basename( dirname( __FILE__ ) ) . '/languages' );
 }
-add_action( 'init', 'wpAppbox_loadTextdomain' );
+add_action( 'plugins_loaded', 'wpAppbox_loadTextdomain' );
 
 
 /**
