@@ -24,6 +24,25 @@ class wpAppbox_imageCache {
 	
 	
 	/**
+	* Check contant type of an image URL
+	*
+	* @since   4.5.6
+	*
+	* @param   string	  	$theURL					URL of an image (internal or external server)
+	* @param   array  		$allowedImageTypes		Array of allowed content types for images
+	* @return  boolean   	true/false
+	*/
+	
+	public static function checkImageCType( $theURL, $allowedImageTypes = array( 'image/jpeg', 'image/png', 'image/webp' ) ) {
+		$imageURL = esc_url_raw( $theURL );
+		$getImage = wp_remote_get( $imageURL );
+		$imageInfo = wp_remote_retrieve_header( $getImage, 'content-type' );
+		if ( !in_array( $imageInfo, $allowedImageTypes ) ) return( false );
+		return( true );
+	}
+	
+	
+	/**
 	* Entfernt http(s):// und Co. aus den Links
 	*
 	* @since   4.0.0
@@ -46,7 +65,7 @@ class wpAppbox_imageCache {
 	* @change  4.0.11
 	*
 	* @param   boolean  	 $returnMsg       Soll der Fehler ausgegeben werden? [optional]
-	* @return  boolean   true/false
+	* @return  boolean   	true/false
 	*/
 	
 	public static function checkImageCache( $returnMsg = false ) {
@@ -97,7 +116,7 @@ class wpAppbox_imageCache {
 	* Speichert externe App-Bilder auf dem eigenen Server
 	*
 	* @since   4.0.0
-	* @change  4.4.0
+	* @change  4.5.6
 	*
 	* @param   string/array  	$imageURL       		Die Bild-URL des Servers (mit http/https)
 	* @param   string  	 		$cacheID       			Die Cache-ID der App
@@ -175,6 +194,11 @@ class wpAppbox_imageCache {
 			else
 				$fileURL = $theURL;
 			
+			if ( !$this->checkImageCType( $fileURL ) ):
+				wpAppbox_errorOutput( 'function: cacheImages() ---> Caching SVG currently not supported.' );
+				return( $fileURL );
+			endif;
+		
 			$downloadedImage = @file_get_contents( $fileURL );
 			if ( !$downloadedImage || FALSE === file_put_contents( $cacheImagePath, $downloadedImage ) ) {
 				wpAppbox_errorOutput( 'function: cacheImages() ---> Image URL isn\'t available. Correct URL?' );

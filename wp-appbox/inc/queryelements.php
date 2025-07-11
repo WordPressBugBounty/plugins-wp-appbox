@@ -287,8 +287,10 @@ if ( !class_exists('DOMDocumentWrapper') ) {
 			}
 			// Should be careful here, still need 'magic encoding detection' since lots of pages have other 'default encoding'
 			// Worse, some pages can have mixed encodings... we'll try not to worry about that
-			$requestedCharset = strtoupper($requestedCharset);
-			$documentCharset = strtoupper($documentCharset);
+			if ( $requestedCharset !== null )
+				$requestedCharset = strtoupper( $requestedCharset );
+			if ( $documentCharset !== null )
+				$documentCharset = strtoupper( $documentCharset );
 			phpQuery::debug("DOC: $documentCharset REQ: $requestedCharset");
 			if ($requestedCharset && $documentCharset && $requestedCharset !== $documentCharset) {
 				phpQuery::debug("CHARSET CONVERT");
@@ -659,7 +661,7 @@ if ( !class_exists('DOMDocumentWrapper') ) {
 			} else {
 				$markup2 = phpQuery::$defaultDoctype.'<html><head><meta http-equiv="Content-Type" content="text/html;charset='
 					.$charset.'"></head>';
-				$noBody = strpos($markup, '<body') === false;
+				$noBody = strpos((string)$markup, '<body') === false;
 				if ($noBody)
 					$markup2 .= '<body>';
 				$markup2 .= $markup;

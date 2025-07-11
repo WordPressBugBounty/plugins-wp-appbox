@@ -308,7 +308,7 @@ class wpAppbox_GetAppInfoAPI {
 	* Gibt die bereits gecachten App-Daten zurück
 	*
 	* @since   2.0.0
-	* @change  4.4.0
+	* @change  4.5.6
 	*
 	* @param   string  $cacheID         Cache-ID der App
 	* @return  array   $appData         Array der App-Daten
@@ -337,9 +337,9 @@ class wpAppbox_GetAppInfoAPI {
 			$appData['appbox_version'] = $cachedApp->appbox_version;
 			$appData['fallback'] = $cachedApp->fallback;
 			$appData['created'] = $cachedApp->created;
-			$appData['deprecated'] = $cachedApp->deprecated;
-			$appData['app_extend'] = unserialize( $cachedApp->app_extend );
-			$appData['app_screenshots'] = unserialize( $cachedApp->app_screenshots );
+			$appData['deprecated'] = $cachedApp->deprecated;			
+			$appData['app_extend'] = ( null !== $cachedApp->app_extend ) ? unserialize( $cachedApp->app_extend ) : "";
+			$appData['app_screenshots'] = ( null !== $cachedApp->app_extend ) ? unserialize( $cachedApp->app_screenshots ) : "";
 			return( $appData );
 		}
 	}
@@ -461,8 +461,8 @@ class wpAppbox_GetAppInfoAPI {
 		$i = 0;
 		$response = '';
 		do {
-			$i++;
-			$response = wp_remote_get( utf8_decode( $appURL ), $args  );
+			$i++;			
+			$response = wp_remote_get( mb_convert_encoding( $appURL, 'ISO-8859-1', 'UTF-8' ), $args  );
 		} while( !isset( $response ) && !isset( $response['body'] ) && 5 <= $i );
 		if ( !isset( $response->errors ) )
 			return( $response );

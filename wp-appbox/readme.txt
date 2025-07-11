@@ -2,9 +2,9 @@
 Contributors: Marcelismus
 Donate link: https://www.paypal.me/marcelismus
 Tags: app store, google play, microsoft store, apps, appbox
-Requires at least: 4.7
-Tested up to: 6.7
-Stable tag: 4.5.5
+Requires at least: 5.0
+Tested up to: 6.8.1
+Stable tag: 4.5.6
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0
 
@@ -58,8 +58,8 @@ By the way, the special feature is also available for the Windows Store: Here, t
 * Fully customizable via HTML and CSS
 
 = Requirements =
-* PHP min. 5.3
-* WordPress min. 3.4
+* PHP min. 7.4
+* WordPress min. 5.0
 * Server with allow_url_fopen, cURL (curl_init and curl_exec) and mb_eregi enabled
 * Outgoing requests must be allowed
 

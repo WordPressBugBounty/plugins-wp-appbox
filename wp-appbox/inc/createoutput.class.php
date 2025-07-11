@@ -113,11 +113,7 @@ class wpAppbox_CreateOutput {
 			else $imageURL = 'http:' . $imageURL;
 		}
 		if ( FALSE === filter_var( $imageURL, FILTER_VALIDATE_URL ) ) return( $imageURL ); //die( 'Invalid URL' );
-		$allowedImageTypes = array( 'image/jpeg', 'image/png', 'image/webp' );
-		$imageURL = esc_url_raw( $imageURL );
-		$getImage = wp_remote_get( $imageURL );
-		$imageInfo = wp_remote_retrieve_header( $getImage, 'content-type' );
-		if ( !in_array( $imageInfo, $allowedImageTypes ) ) return( $imageURL ); //die( 'Invalid image file' );
+		if ( !wpAppbox_ImageCache::checkImageCType( $imageURL ) ) return( $imageURL ); //die( 'Invalid image file' );
 		$imageURL = $data_uri = 'data:image/jpeg;base64,' . base64_encode( $getImage['body'] ) ;
 		return( $imageURL );
 	}
