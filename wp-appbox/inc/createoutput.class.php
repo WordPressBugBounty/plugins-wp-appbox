@@ -282,7 +282,7 @@ class wpAppbox_CreateOutput {
 	* Gibt die Screenshots zurück
 	*
 	* @since   2.0.0
-	* @change  4.4.0
+	* @change  4.5.7
 	*
 	* @param   array   $appScreenshots     Array der Screenshots
 	* @param   string  $storeID            ID des Stores (z.B. "appstore")
@@ -292,6 +292,9 @@ class wpAppbox_CreateOutput {
 	*/
 	
 	function returnScreenshots( $appScreenshots, $storeID, $cacheID, $appType = '' ) {		
+		if( !is_array( $appScreenshots ) ):
+			$appScreenshots = array();
+        endif;
 		switch ( $storeID ):
 			case 'appstore':
 				$appScreenshots['mac'][] = '';
