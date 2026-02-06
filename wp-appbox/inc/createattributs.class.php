@@ -31,7 +31,7 @@ class wpAppbox_CreateAttributs {
 	* Prüfen ob Shortcode-Attribut ein Store ist
 	*
 	* @since   2.0.0
-	* @change  4.4.5
+	* @change  4.5.8
 	*
 	* @param   string   $value      Attribut
 	* @return  boolean  true/false  TRUE when Store
@@ -39,29 +39,8 @@ class wpAppbox_CreateAttributs {
 	
 	function isValueStore( $value ) {
 		global $wpAppbox_storeNames;
-		if ( 'androidpit' == $value ) $value = 'googleplay';
-		if ( 'goodoldgames' == $value ) $value = 'gog';
 		if ( 'windowsphone' == $value || 'windowsstore' == $value ) $value = 'microsoftstore';
 		if ( isset( $wpAppbox_storeNames ) && array_key_exists( $value, $wpAppbox_storeNames ) ) {
-			return( true );
-		} else {
-			return( false );
-		}
-	}
-	
-	
-	/**
-	* Prüfen ob Shortcode-Attribut "Bundle" ist
-	*
-	* @since   3.0.0
-	* @change  3.2.0
-	*
-	* @param   string   $value      Attribut
-	* @return  boolean  true/false  TRUE when "Bundle"
-	*/
-	
-	function isValueAppBundle( $value ) {
-		if ( 'bundle' == $value ) {
 			return( true );
 		} else {
 			return( false );
@@ -99,7 +78,7 @@ class wpAppbox_CreateAttributs {
 	* Gibt die Attribute der Appbox zurück
 	*
 	* @since   2.0.0
-	* @change  4.2.0
+	* @change  4.5.8
 	*
 	* @param   array  $attribute  Attribute des Shortcodes [WordPress]
 	* @return  array  $attr       Attribute des Shortcodes als "reines" Array
@@ -110,14 +89,11 @@ class wpAppbox_CreateAttributs {
 		$attr =	array(	
 			'store' => '',
 			'style' => '',
-			'appid' => '',
-			'bundle' => false
+			'appid' => ''
 		);
 		if ( is_array( $attribute ) ) {
 			foreach ( $attribute as $value ) {
-				if ( $this->isValueAppBundle( $value ) ) {
-					$attr['bundle'] = true;
-				} elseif ( $this->isValueStyle( $value ) ) {
+				if ( $this->isValueStyle( $value ) ) {
 					$attr['style'] = $value;
 				} elseif ( $this->isValueStore( $value ) ) {
 					$attr['store'] = $value;

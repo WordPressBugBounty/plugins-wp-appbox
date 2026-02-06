@@ -2,7 +2,7 @@
 * Ein paar Variablen und Konstanten
 *
 * @since   4.4.11
-* @change  n/a
+* @change  4.5.8
 */
 
 const { __ } = wp.i18n;
@@ -63,13 +63,10 @@ registerBlockType( 'wp-appbox/appbox', {
 							{ value: 'edgeaddons', label: 'Edge-Add-ons' },
 							{ value: 'firefoxaddon', label: 'Firefox Extensions' },
 							{ value: 'f-droid', label: 'F-Droid' },
-							{ value: 'gog', label: 'GOG.com (Good Old Games)' },
-							{ value: 'appgallery', label: 'Huawei AppGallery' },
 							{ value: 'googleplay', label: 'Google Play Store' },
 							{ value: 'microsoftstore', label: 'Microsoft Store' },
 							{ value: 'operaaddons', label: 'Opera Add-ons' },
 							{ value: 'snapcraft', label: 'Snapcraft' },
-							{ value: 'steam', label: 'Steam' },
 							{ value: 'wordpress', label: 'Wordpress Plugin' }
 						],
 						onChange: ( value ) => { props.setAttributes( { storeID: value } ); },

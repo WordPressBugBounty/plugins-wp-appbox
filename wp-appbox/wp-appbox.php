@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: WP-Appbox
-Version: 4.5.7
+Version: 4.5.10
 Plugin URI: https://tchgdns.de/wp-appbox-app-badge-fuer-google-play-mac-app-store-windows-store-windows-phone-store-co/
 Description: With WP-Appbox you can add beautiful mobile app badges to your WordPress posts and pages simply by adding a shortcode.
 Author: Marcel Schmilgeit
@@ -12,7 +12,7 @@ Domain Path: /lang
 
 
 /*
-Copyright (C)  2012-2024 Marcel Schmilgeit
+Copyright (C)  2012-2025 Marcel Schmilgeit
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -37,42 +37,53 @@ defined( 'ABSPATH' ) or exit( 'Nothing to see here' ); // Exit if accessed direc
 
 
 /**
-* Ein paar Variablen
+* Ein paar Definitionen #YOLO
 */
+
+global $wpdb;
+define( 'WPAPPBOX_MIN_PHPVERSION', '7.4' );
+define( 'WPAPPBOX_PLUGIN_NAME', 'WP-Appbox' ); 
+define( 'WPAPPBOX_PLUGIN_VERSION', '4.5.10' );
+define( 'WPAPPBOX_DB_VERSION', '1.0.4' );
+define( 'WPAPPBOX_PREFIX', 'wpAppbox_' );
+define( 'WPAPPBOX_TABLE_NAME', 'appbox' );
 $wpAppboxFirstShortcode = true;
 
 
 /**
 * Includierung benötigter Scripte und Dateien
 *
-* @since   1.0.0
-* @change  4.4.0
+* @since   4.5.9
 */
-include_once( "inc/definitions.php" );
-include_once( "inc/appboxdb.php" );
-include_once( "inc/imagecache.class.php" );
-include_once( "inc/getstoreurls.class.php" );
-if ( is_admin() ) {
-	include_once( 'admin/tinymce.php' );
-	include_once( "admin/settings.php" );
-	if ( isset( $_GET['page'] ) && 'wp-appbox' == $_GET['page'] ) {
-		switch ( isset( $_GET['tab'] ) ) {
-			case 'storeurls':
-			case 'advanced':
-				include_once( "inc/getstoreurls.class.php" );
-				break;
-			case 'cache-list':
-				include_once( "inc/getappinfo.class.php" );
-				include_once( "inc/createoutput.class.php" );
-				break;
+function wpAppbox_includeFiles() {
+	include_once( "inc/definitions.php" );
+	include_once( "inc/appboxdb.php" );
+	include_once( "inc/imagecache.class.php" );
+	include_once( "inc/getstoreurls.class.php" );
+	if ( is_admin() ) {
+		include_once( 'admin/tinymce.php' );
+		include_once( "admin/settings.php" );
+		if ( isset( $_GET['page'] ) && 'wp-appbox' == $_GET['page'] ) {
+			switch ( isset( $_GET['tab'] ) ) {
+				case 'storeurls':
+				case 'advanced':
+					include_once( "inc/getstoreurls.class.php" );
+					break;
+				case 'cache-list':
+					include_once( "inc/getappinfo.class.php" );
+					include_once( "inc/createoutput.class.php" );
+					break;
+			}
 		}
 	}
+	if ( !is_admin() ) {
+		include_once( "inc/getappinfo.class.php" );
+		include_once( "inc/createattributs.class.php" );
+		include_once( "inc/createoutput.class.php" );
+	}
 }
-if ( !is_admin() ) {
-	include_once( "inc/getappinfo.class.php" );
-	include_once( "inc/createattributs.class.php" );
-	include_once( "inc/createoutput.class.php" );
-}
+add_action( 'init', 'wpAppbox_includeFiles' );
+add_action( 'admin_init', 'wpAppbox_includeFiles' );
 
 
 /**
@@ -85,7 +96,6 @@ function wpAppbox_loadTextdomain() {
 	load_textdomain( 'wp-appbox', plugin_dir_path( __FILE__ ) . 'languages/wp-appbox-' . determine_locale() . '.mo' );
 }
 add_action( 'init', 'wpAppbox_loadTextdomain' );
-
 
 
 /**
@@ -390,13 +400,6 @@ function wpAppbox_autoDetectLinks( $content ) {
 		return( '[appbox edgeaddons ' . $appID . ']' );
 	}, $content );
 	
-	//Links zur Huawei App Gallery
-	$pattern = '/^(?:<p>)?http.?:\/\/appgallery\.huawei\.com\/app\/(.*?)(?:\/.*?)?(?:<\/p>)?$/m';
-	$content = preg_replace_callback( $pattern, function ( $matches ) {
-		$appID = Trim( $matches[1] );
-		return( '[appbox appgallery ' . $appID . ']' );
-	}, $content );
-	
 	//Links zu Amazon-Apps
 	$pattern = array(	'/^(?:<p>)?http.?:\/\/www\.amazon\.*(?:.*?)\/gp\/product\/([A-Za-z0-9]*)(?:.*)(?:<\/p>)?$/m',
 						'/^(?:<p>)?http.?:\/\/www\.amazon\.*(?:.*?)\/dp\/([A-Za-z0-9]*)(?:.*)(?:<\/p>)?$/m',
@@ -435,25 +438,11 @@ function wpAppbox_autoDetectLinks( $content ) {
 		return( '[appbox wordpress ' . $appID . ']' );
 	}, $content );
 	
-	//Links zu Games von GOG.com
-	$pattern = '/^(?:<p>)?http.?:\/\/(?:www\.)?gog\.com\/game\/([A-Za-z0-9-_]*)(?:.*)?(?:<\/p>)?$/m';
-	$content = preg_replace_callback( $pattern, function ( $matches ) {
-		$appID = Trim( $matches[1] );
-		return( '[appbox gog ' . $appID . ']' );
-	}, $content );
-	
 	//Links zu Snapcraft
 	$pattern = '/^(?:<p>)?http.?:\/\/snapcraft\.io\/([A-Za-z0-9-_]*)(?:.*)?(?:<\/p>)?$/m';
 	$content = preg_replace_callback( $pattern, function ( $matches ) {
 		$appID = Trim( $matches[1] );
 		return( '[appbox snapcraft ' . $appID . ']' );
-	}, $content );
-	
-	//Links zu Games von Steam
-	$pattern = '/^(?:<p>)?http.?:\/\/store\.steampowered\.com\/app\/([A-Za-z0-9-_]*)(?:.*)?(?:<\/p>)?$/m';
-	$content = preg_replace_callback( $pattern, function ( $matches ) {
-		$appID = Trim( $matches[1] );
-		return( '[appbox steam ' . $appID . ']' );
 	}, $content );
 	
 	//Links zu Opera Addons
@@ -473,13 +462,22 @@ if ( get_option('wpAppbox_autoLinks') ) add_filter( 'the_content', 'wpAppbox_aut
 * Benötigte Update-Funktionen durchführen
 *
 * @since   3.1.6
-* @change  4.5.2
+* @change  4.5.8
 */
 
 wpAppbox_UpdateAction();
             
 function wpAppbox_UpdateAction() {
 	if ( get_option('wpAppbox_pluginVersion') == WPAPPBOX_PLUGIN_VERSION ) return;
+	if ( wpAppbox_checkOlderVersion( '4.5.9' ) ) {
+		global $wpdb; 
+		$sql = "DELETE FROM $wpdb->options WHERE option_name LIKE ('%wpAppbox_%steam%') OR option_name LIKE ('%wpAppbox_%gog%') OR option_name LIKE ('%wpAppbox_%appgallery%')";
+		$wpdb->query( $sql );
+		$sql = "DELETE FROM wp_appbox WHERE store_name_css LIKE ('%steam%') OR store_name_css LIKE ('%gog%') OR store_name_css LIKE ('%appgallery%')";
+		$wpdb->query( $sql );
+		$sql = " UPDATE wp_appbox SET store_name_css = REPLACE( store_name_css, 'macappstore', 'appstore' ) WHERE store_name_css LIKE '%macappstore%'";
+		$wpdb->query( $sql );
+	}
 	if ( wpAppbox_checkOlderVersion( '4.5.2' ) ) {
 		delete_option( 'wpAppbox_userAffiliate' );
 		delete_option( 'wpAppbox_affiliateMicrosoftDev' );
@@ -507,7 +505,6 @@ function wpAppbox_UpdateAction() {
 		global $wpdb; 
 		wpAppbox_setOptions();
 		wpAppbox_changeStoreName( 'windowsstore', 'microsoftstore', 'Microsoft Store' );
-		wpAppbox_changeStoreName( 'goodoldgames', 'gog', 'GOG.com' );
 	}
 	if ( wpAppbox_checkOlderVersion( '4.1.26' ) ) {
 		wpAppbox_setOptions();
@@ -554,10 +551,6 @@ function wpAppbox_UpdateAction() {
 			update_option( 'wpAppbox_includeCSS', 0, 'no' );
 		delete_option( 'wpAppbox_disableCSS' );
 	}
-	if ( wpAppbox_checkOlderVersion( '4.0.36' ) ) {
-		if ( !get_option( 'wpAppbox_storeURL_steam' ) )
-			update_option( 'wpAppbox_storeURL_steam', '1', 'no' );
-	}
 	if ( wpAppbox_checkOlderVersion( '4.0.30' ) ) {
 		global $wpdb; 
 		$wpdb->query( "DELETE FROM $wpdb->options WHERE option_name LIKE ('%wpAppbox_blockQuery_%')" );
@@ -603,8 +596,10 @@ function wpAppbox_UpdateAction() {
 		wpAppbox_createTable();
 	}
 	/* Grundsätzlich nach Update zu prüfen */ 
-	if ( get_option('wpAppbox_dbVersion') != WPAPPBOX_DB_VERSION )
+	if ( get_option('wpAppbox_dbVersion') != WPAPPBOX_DB_VERSION ):
+		include_once( "inc/appboxdb.php" );
 		wpAppbox_createTable();
+	endif;
 	/* Neue Versionsnummer in die Datenbank schreiben */ 
 	update_option( "wpAppbox_pluginVersion", WPAPPBOX_PLUGIN_VERSION );
 }
@@ -841,10 +836,11 @@ function wpAppbox_activatePlugin( $network_wide ) {
 * Aktivierung-Actions des Plugins
 *
 * @since  3.2.7
-* @change 4.0.9
+* @change 4.5.9
 */
 
 function wpAppbox_activateActions() {
+	wpAppbox_includeFiles();
 	wpAppbox_autoLanguageStoreURLs(); /* Standard-URLs für die Stores festlegen */
 	wpAppbox_setOptions(); /* Standard-Einstellungen in wp_options schreiben */
 	wpAppbox_createTable(); /* Tabelle für "WP-Appbox" erstellen */
@@ -877,11 +873,12 @@ function wpAppbox_uninstallPlugin() {
 * Deinstallation-Actions des Plugins
 *
 * @since  3.2.2
-* @change 4.0.0
+* @change 4.5.9
 */
 
 function wpAppbox_uninstallActions() {
 	global $wpdb;
+	wpAppbox_includeFiles();
 	$wpdb->query( "DELETE FROM " . $wpdb->prefix . "options WHERE option_name LIKE 'wpAppbox_%';" );
 	delete_option( "wpAppbox" ); //Für ältere Versionen ==> bis 3.1.6
 	wp_clear_scheduled_hook( 'wpAppbox_cacheCron' );
@@ -917,6 +914,7 @@ function wpAppbox_deactivatePlugin() {
 */
 
 function wpAppbox_deactivateActions() {
+	wpAppbox_includeFiles();
 	wp_clear_scheduled_hook( 'wpAppbox_cacheCron' );
 }
 

@@ -3,8 +3,8 @@ Contributors: Marcelismus
 Donate link: https://www.paypal.me/marcelismus
 Tags: app store, google play, microsoft store, apps, appbox
 Requires at least: 5.0
-Tested up to: 6.8.1
-Stable tag: 4.5.7
+Tested up to: 6.9.0
+Stable tag: 4.5.10
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0
 
@@ -21,7 +21,6 @@ Apps & Software:
 * Apple App Store
 * F-Droid
 * Google Play Store
-* Huawei AppGallery (highly experimental!)
 * Microsoft Store
 * Snapcraft
 * WordPress-Plugins
@@ -32,19 +31,15 @@ Browser Extensions:
 * Firefox Add-ons
 * Opera Add-ons
 
-Games:
-* GOG.com (Good Old Games)
-* Steam (only single games)
-
 = Usage of the shortcode =
 
 All stores are integrated in a short code and can be inserted via button in the WordPress editor. The structure of the short code is always the following:
 
 [appbox *storename* *app-id* *style*]
 
-The order does not matter - as long as "appbox" is on the front. The blind names are: amazonapps, appstore, chromewebstore, fdroid, firefoxaddon, firefoxmarketplace, goodoldgames, googleplay, operaaddons, steam, windowsstore and wordpress. How to get the ID of the corresponding apps is illustrated in the settings for WP-Appbox. The default format is "simple", alternatively there is also an ad with "compact", "screenshots" and "screenshots-only".
+The order does not matter - as long as "appbox" is on the front. The blind names are: amazonapps, appstore, chromewebstore, fdroid, firefoxaddon, googleplay, operaaddons, steam, windowsstore and wordpress. How to get the ID of the corresponding apps is illustrated in the settings for WP-Appbox. The default format is "simple", alternatively there is also an ad with "compact", "screenshots" and "screenshots-only".
 
-There is another special feature for the App Store: With Universal Apps you can decide whether you want to get screenshots of the iPhone, iPad and the Watch App, or for example only of the iPhone, only of the iPad or only of the Watch App. All you need to do is simply attach a "-iphone", "-ipad" or "-watch" to the ID of the app. Example: 392502056-ipad.
+There is another special feature for the App Store: With Universal Apps you can decide whether you want to get screenshots of the iPhone, iPad and the Watch App, or for example only of the iPhone, only of the iPad or only of the Watch App. All you need to do is simply attach a "-iphone", "-ipad", "-watch", "-vision" or "-appletv" to the ID of the app. Example: 392502056-ipad.
 
 By the way, the special feature is also available for the Windows Store: Here, too, only the mobile screenshots or those of the desktop version can be displayed. All you have to do is attach a "-mobile" or "-desktop" to the App-ID. Example: 392502056-mobile.
 
@@ -146,6 +141,15 @@ A first implementation is available. However, this is experimental in nature and
 
 
 == Changelog ==
+
+= 4.5.9 - 4.5.10 =
+* Fixed: Various bugs
+
+= 4.5.8 =
+* Fixed: New App Store website
+* Removed: Steam (due to incompatibility)
+* Removed: GOG.com (due to incompatibility)
+* Removed: Huawei AppGallery (due to incompatibility)
 
 = 4.5.3 - 4.5.7 =
 * Fixed: Various bugs

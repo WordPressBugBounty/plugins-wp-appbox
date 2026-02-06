@@ -192,7 +192,7 @@ class Cached_Apps extends WP_List_Table {
 	* Werte der einzelnen Spalten/Tulpen ausgeben
 	*
 	* @since   2.0.0
-	* @change  4.2.0
+	* @change  4.5.8
 	*/
 	
 	function column_default( $item, $columnName ) {
@@ -219,17 +219,8 @@ class Cached_Apps extends WP_List_Table {
 				}
 				return( '<img src="' . $item[$columnName] . '" ' . $classDeprecated . 'style="width:48px; height:48px;" />' );
 			case 'app_store':
-				switch( $item[$columnName] ):
-					case 'appstore': 
-						$wpAppbox_storeName = 'App Store (iOS)';
-						break;
-					case 'macappstore':
-						$wpAppbox_storeName = 'App Store (Mac)';
-						break;
-					default:
-						$wpAppbox_storeName = $wpAppbox_storeNames[$item[$columnName]];
-				endswitch;
-				return( '<img src="' . plugins_url( 'img/'.( ( 'macappstore' == $item[$columnName] ) ? 'macappstore' : $item[$columnName] ).'-small.png', dirname( __FILE__ ) ) . '" style="margin-right:8px; height:14px;" />' . $wpAppbox_storeName );
+				$wpAppbox_storeName = $wpAppbox_storeNames[$item[$columnName]];
+				return( '<img src="' . plugins_url( 'img/' . $item[$columnName] . '-small.png', dirname( __FILE__ ) ) . '" style="margin-right:8px; height:14px;" />' . $wpAppbox_storeName );
 			case 'app_expiry':
 			    	return( date_i18n( 'd.m.Y, H:i:s', $item[$columnName] ) );
 			default:
@@ -399,7 +390,7 @@ class Cached_Apps extends WP_List_Table {
 	* Bulk-Actions durchführen
 	*
 	* @since   2.0.0
-	* @change  4.4.0
+	* @change  4.5.8
 	*/
 	
 	function process_bulk_action() {
@@ -425,7 +416,7 @@ class Cached_Apps extends WP_List_Table {
 					$cachedApp = $wpdb->get_row( $wpdb->prepare( "SELECT app_id, store_name_css FROM " . $wpdb->prefix . WPAPPBOX_TABLE_NAME . " WHERE id = %s", $cacheID ) );
 					if ( $cachedApp != null ) {
 						$appID = $cachedApp->app_id;
-						$storeNameCSS = ('macappstore' == $cachedApp->store_name_css) ? 'appstore' : $cachedApp->store_name_css;
+						$storeNameCSS = $cachedApp->store_name_css;
 						$appData = new wpAppbox_GetAppInfoAPI;
 						$appData = $appData->getTheAppData( $storeNameCSS, $appID );
 					}
@@ -439,7 +430,7 @@ class Cached_Apps extends WP_List_Table {
 	* Boxen und Textfelder über und unter der Tabelle einbauen
 	*
 	* @since   3.0.0
-	* @change  4.4.0
+	* @change  4.5.8
 	*
 	* @param   string  $which  Über oder unter der Tabelle(top, bottom)
 	* @output  string          HTML-Ausgabe der Optionsfelder
@@ -457,8 +448,6 @@ class Cached_Apps extends WP_List_Table {
 		   	  			<?php
 		   	  				global $wpAppbox_storeNames;
 		   	  				if ( isset( $wpAppbox_storeNames ) ):
-		   	  					$wpAppbox_storeNames['appstore'] = 'App Store (iOS)';
-		   	  					$wpAppbox_storeNames['macappstore'] = 'App Store (Mac)';
 		   	  					asort( $wpAppbox_storeNames );
 		   	  					foreach ( $wpAppbox_storeNames as $storeID => $storeName ):
 		   	  					?>

@@ -24,7 +24,7 @@
 	<tr valign="top">
 	
 		<th scope="row"><?php esc_html_e('App Store screenshots', 'wp-appbox'); ?>:</th>
-		<td><?php printf( esc_html__( 'Link to a universal app for iOS, you can just leave on request show the iPhone or iPad screenshots. For this, %1$s can be added to the App ID.', 'wp-appbox' ), '<code>-iphone</code>, <code>-ipad</code>, <code>-watch</code>, <code>-imessage</code>, <code>-appletv</code> or <code>-visionpro</code>' ); ?> <?php esc_html_e( 'Example', 'wp-appbox' ); ?>: <code>[appbox appstore appid-iphone screenshots]</code></td>
+		<td><?php printf( esc_html__( 'Link to a universal app for iOS, you can just leave on request show the iPhone or iPad screenshots. For this, %1$s can be added to the App ID.', 'wp-appbox' ), '<code>-iphone</code>, <code>-ipad</code>, <code>-watch</code>, <code>-imessage</code>, <code>-appletv</code> or <code>-vision</code>' ); ?> <?php esc_html_e( 'Example', 'wp-appbox' ); ?>: <code>[appbox appstore appid-iphone screenshots]</code></td>
 	</tr>
 	
 	<tr valign="top">

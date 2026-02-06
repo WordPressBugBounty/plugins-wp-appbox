@@ -10,7 +10,7 @@
 			<th scope="row"><?php esc_html_e( $wpAppbox_storeNames[$storeID] ); ?>:</th>
 			<td>	
 				<?php 
-					if ( in_array( $storeID, $wpAppbox_storeURL_noLanguages ) ):
+					if ( is_array( $wpAppbox_storeURL_noLanguages ) && in_array( $storeID, $wpAppbox_storeURL_noLanguages ) ):
 						echo( __('No language selection supported.', 'wp-appbox') ); 
 					else:
 					?>

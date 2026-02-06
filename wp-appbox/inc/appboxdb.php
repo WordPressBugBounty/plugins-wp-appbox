@@ -279,7 +279,6 @@ function wpAppbox_cacheCron() {
 	foreach ( $appArray as $appData ):
 		if ( $currentStore == $storeNameCSS ) sleep( 5 );
 		$appID = $appData['app_id'];
-		$storeNameCSS = ( 'macappstore' == $appData['store_name_css'] ) ? 'appstore' : $appData['store_name_css'];
 		$appCache = new wpAppbox_GetAppInfoAPI;
 		$appCache = $appCache->getTheAppData( $storeNameCSS, $appID, true );
 		$currentStore = $storeNameCSS;

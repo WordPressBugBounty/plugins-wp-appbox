@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WP-Appbox\n"
-"POT-Creation-Date: 2024-09-21 17:04+0200\n"
-"PO-Revision-Date: 2024-09-21 17:04+0200\n"
+"POT-Creation-Date: 2025-11-03 22:42+0100\n"
+"PO-Revision-Date: 2025-11-03 22:42+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de\n"
@@ -10,29 +10,28 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.4\n"
+"X-Generator: Poedit 3.7\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
-"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
-"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-KeywordsList: "
+"__;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
-#: _getappinfo.class.php:242 inc/getappinfo.class.php:246
+#: _getappinfo.class.php:242 inc/getappinfo.class.php:237
 msgid "Unknown app"
 msgstr "Unbekannte App"
 
 #: _getappinfo.class.php:246 _getappinfo.class.php:1464
-#: inc/getappinfo.class.php:250 inc/getappinfo.class.php:1648
+#: inc/getappinfo.class.php:241 inc/getappinfo.class.php:1421
 msgid "Unknown"
 msgstr "Unbekannt"
 
-#: _getappinfo.class.php:267 inc/getappinfo.class.php:271
+#: _getappinfo.class.php:267 inc/getappinfo.class.php:262
 msgid "unknown"
 msgstr "Unbekannt"
 
-#: _getappinfo.class.php:1074 inc/getappinfo.class.php:1092
+#: _getappinfo.class.php:1074 inc/getappinfo.class.php:918
 msgid "various"
 msgstr "diverse"
 
@@ -393,11 +392,11 @@ msgstr "In HTML-Ansicht"
 msgid "Hide button"
 msgstr "Button verstecken"
 
-#: admin/settings-cache-list.php:206 inc/createoutput.class.php:370
+#: admin/settings-cache-list.php:206 inc/createoutput.class.php:369
 msgid "Free"
 msgstr "Kostenlos"
 
-#: admin/settings-cache-list.php:208 inc/createoutput.class.php:372
+#: admin/settings-cache-list.php:208 inc/createoutput.class.php:371
 msgid "Code needed"
 msgstr "Code benötigt"
 
@@ -935,7 +934,7 @@ msgstr "Erweitert"
 msgid "Help"
 msgstr "Hilfe"
 
-#: admin/settings.php:113 wp-appbox.php:789
+#: admin/settings.php:113 wp-appbox.php:764
 msgid "PayPal-Donation"
 msgstr "PayPal-Donation"
 
@@ -1019,47 +1018,47 @@ msgstr "Änderungen speichern"
 msgid "Show all apps in cache"
 msgstr "Alle Apps im Cache anzeigen"
 
-#: inc/createoutput.class.php:281
+#: inc/createoutput.class.php:277
 msgid "of 5 stars"
 msgstr "von 5 Sternen"
 
-#: inc/createoutput.class.php:344
+#: inc/createoutput.class.php:343
 msgid "Screenshot"
 msgstr "Screenshot"
 
-#: inc/createoutput.class.php:394
+#: inc/createoutput.class.php:393
 msgid "Renew cached data of this app"
 msgstr "App-Daten erneut laden"
 
-#: inc/createoutput.class.php:419
+#: inc/createoutput.class.php:418
 msgid "The App Store is not recognized."
 msgstr "Der App Store wurde nicht erkannt."
 
-#: inc/createoutput.class.php:422
+#: inc/createoutput.class.php:421
 msgid "The App ID is not recognized."
 msgstr "Die App-ID wurde nicht erkannt."
 
-#: inc/createoutput.class.php:425
+#: inc/createoutput.class.php:424
 msgid "The app was not found in the store."
 msgstr "Die App konnte im App Store nicht gefunden werden."
 
-#: inc/createoutput.class.php:428
+#: inc/createoutput.class.php:427
 msgid "An unknown error has occurred."
 msgstr "Es ist ein unbekannter Fehler aufgetreten."
 
-#: inc/createoutput.class.php:597
+#: inc/createoutput.class.php:594
 msgid "Exclusive to Apple Arcade"
 msgstr "Exklusiv bei Apple Arcade"
 
-#: inc/createoutput.class.php:607
+#: inc/createoutput.class.php:604
 msgid "Preorder"
 msgstr "Preorder"
 
-#: inc/createoutput.class.php:609
+#: inc/createoutput.class.php:606
 msgid "Register"
 msgstr "Register"
 
-#: inc/createoutput.class.php:610
+#: inc/createoutput.class.php:607
 msgid "To be announced"
 msgstr "Wird angekündigt"
 
@@ -1072,138 +1071,126 @@ msgid "Amazon Apps"
 msgstr "Amazon Apps"
 
 #: inc/definitions.php:89
-msgid "Huawei AppGallery"
-msgstr ""
-
-#: inc/definitions.php:90
 msgid "(Mac) App Store"
 msgstr "(Mac) App Store"
 
-#: inc/definitions.php:91
+#: inc/definitions.php:90
 msgid "Chrome Web Store"
 msgstr "Chrome Web Store"
 
-#: inc/definitions.php:92
+#: inc/definitions.php:91
 msgid "Edge-Add-Ons"
-msgstr ""
+msgstr "Edge-Add-Ons"
 
-#: inc/definitions.php:93
+#: inc/definitions.php:92
 msgid "F-Droid"
 msgstr "F-Droid"
 
-#: inc/definitions.php:94
+#: inc/definitions.php:93
 msgid "Firefox Add-ons"
 msgstr "Firefox Erweiterungen"
 
-#: inc/definitions.php:95
-msgid "GOG.com"
-msgstr "GOG.com"
-
-#: inc/definitions.php:96
+#: inc/definitions.php:94
 msgid "Google Play Apps"
 msgstr "Google Play Apps"
 
-#: inc/definitions.php:97
+#: inc/definitions.php:95
 msgid "Opera Add-ons"
 msgstr "Opera Add-ons"
 
-#: inc/definitions.php:98
-msgid "Steam"
-msgstr "Steam"
-
-#: inc/definitions.php:99
+#: inc/definitions.php:96
 msgid "Snapcraft"
 msgstr "Snapcraft"
 
-#: inc/definitions.php:100
+#: inc/definitions.php:97
 msgid "Microsoft Store"
 msgstr "Microsoft Store"
 
-#: inc/definitions.php:101
+#: inc/definitions.php:98
 msgid "WordPress Plugins"
 msgstr "WordPress Plugins"
 
-#: inc/definitions.php:148 inc/getstoreurls.class.php:19
+#: inc/definitions.php:142 inc/getstoreurls.class.php:19
 msgid "Australia"
 msgstr "Australien"
 
-#: inc/definitions.php:149
+#: inc/definitions.php:143
 msgid "Belgium"
 msgstr "Belgien"
 
-#: inc/definitions.php:150
+#: inc/definitions.php:144
 msgid "Brazil"
 msgstr "Brasilien"
 
-#: inc/definitions.php:151
+#: inc/definitions.php:145
 msgid "Canada"
 msgstr "Kanada"
 
-#: inc/definitions.php:152
+#: inc/definitions.php:146
 msgid "Egypt"
-msgstr ""
+msgstr "Ägypten"
 
-#: inc/definitions.php:153 inc/getstoreurls.class.php:10
+#: inc/definitions.php:147 inc/getstoreurls.class.php:10
 msgid "France"
 msgstr "Frankreich"
 
-#: inc/definitions.php:154 inc/getstoreurls.class.php:7
+#: inc/definitions.php:148 inc/getstoreurls.class.php:7
 msgid "Germany"
 msgstr "Deutschland"
 
-#: inc/definitions.php:155
+#: inc/definitions.php:149
 msgid "India"
 msgstr "Indien"
 
-#: inc/definitions.php:156 inc/getstoreurls.class.php:14
+#: inc/definitions.php:150 inc/getstoreurls.class.php:14
 msgid "Italy"
 msgstr "Italien"
 
-#: inc/definitions.php:157 inc/getstoreurls.class.php:17
+#: inc/definitions.php:151 inc/getstoreurls.class.php:17
 msgid "Japan"
 msgstr "Japan"
 
-#: inc/definitions.php:158
+#: inc/definitions.php:152
 msgid "Mexico"
 msgstr "Mexiko"
 
-#: inc/definitions.php:159
+#: inc/definitions.php:153
 msgid "Netherlands"
 msgstr "Niederlande"
 
-#: inc/definitions.php:160 inc/getstoreurls.class.php:18
+#: inc/definitions.php:154 inc/getstoreurls.class.php:18
 msgid "Poland"
 msgstr "Polen"
 
-#: inc/definitions.php:161
+#: inc/definitions.php:155
 msgid "Singapore"
 msgstr "Singapur"
 
-#: inc/definitions.php:162
+#: inc/definitions.php:156
 msgid "Saudi Arabia"
 msgstr "Saudi-Arabien"
 
-#: inc/definitions.php:163 inc/getstoreurls.class.php:11
+#: inc/definitions.php:157 inc/getstoreurls.class.php:11
 msgid "Spain"
 msgstr "Spanien"
 
-#: inc/definitions.php:164
+#: inc/definitions.php:158
 msgid "Sweden"
 msgstr "Schweden"
 
-#: inc/definitions.php:165 inc/getstoreurls.class.php:13
+#: inc/definitions.php:159 inc/getstoreurls.class.php:13
 msgid "Turkey"
 msgstr "Türkei"
 
-#: inc/definitions.php:166
+#: inc/definitions.php:160
 msgid "United Arab Emirates"
 msgstr "Vereinigte Arabische Emirate"
 
-#: inc/definitions.php:167 inc/getstoreurls.class.php:9
+#: inc/definitions.php:161 inc/getstoreurls.class.php:9
 msgid "United Kingdom"
 msgstr "Vereinigtes Königreich"
 
-#: inc/definitions.php:168 inc/getstoreurls.class.php:8
+#: inc/definitions.php:162 inc/getstoreurls.class.php:8
 msgid "United States"
 msgstr "Vereinigte Staaten"
 
@@ -1231,7 +1218,7 @@ msgstr "China"
 msgid "Indonesia"
 msgstr "Indonesien"
 
-#: inc/imagecache.class.php:55
+#: inc/imagecache.class.php:74
 #, php-format
 msgid ""
 "%1$s is not activated on this server. Please activate it or contact your "
@@ -1240,14 +1227,14 @@ msgstr ""
 "%1$s ist auf diesem Server nicht aktiviert. Bitte aktiviere es oder "
 "kontaktiere deinen Webhoster und versuche es erneut."
 
-#: inc/imagecache.class.php:59
+#: inc/imagecache.class.php:78
 #, php-format
 msgid "Folder %1$s cannot be created. Please create manually and try again."
 msgstr ""
 "Der Ordner %1$s konnte nicht erstellt werden. Bitte manuell erstellen und "
 "dann nochmals versuchen."
 
-#: inc/imagecache.class.php:64
+#: inc/imagecache.class.php:83
 #, php-format
 msgid ""
 "Folder %1$s is not writable. Please set CHMOD (755) manually and try again."
@@ -1255,7 +1242,7 @@ msgstr ""
 "Der Ordner %1$s ist nicht beschreibbar. Bitte den CHMOD-Wert (755) manuell "
 "setzen und erneut versuchen."
 
-#: inc/imagecache.class.php:67
+#: inc/imagecache.class.php:86
 #, php-format
 msgid ""
 "Folder %1$s is not readable. Please set CHMOD (755) manually and try again."
@@ -1263,11 +1250,11 @@ msgstr ""
 "Der Ordner %1$s ist nicht lesbar. Bitte den CHMOD-Wert (755) manuell setzen "
 "und erneut versuchen."
 
-#: inc/imagecache.class.php:70
+#: inc/imagecache.class.php:89
 msgid "All fine."
 msgstr "Alles in Ordnung."
 
-#: inc/imagecache.class.php:368
+#: inc/imagecache.class.php:392
 msgid "Cleanup successfully completed."
 msgstr "Der Bilderordner wurde erfolgreich bereinigt."
 
@@ -1292,39 +1279,39 @@ msgstr "QR-Code"
 msgid "Every %1$s minutes"
 msgstr "Alle %1$s Minuten"
 
-#: wp-appbox.php:737
+#: wp-appbox.php:712
 msgid "Settings"
 msgstr "Einstellungen"
 
-#: wp-appbox.php:747
+#: wp-appbox.php:722
 msgid "WP-Appbox"
 msgstr "WP-Appbox"
 
-#: wp-appbox.php:748
+#: wp-appbox.php:723
 msgid "Homepage"
 msgstr "Webseite"
 
-#: wp-appbox.php:785
+#: wp-appbox.php:760
 msgid "Follow me on Mastodon"
 msgstr "Folge mir auf Mastodon"
 
-#: wp-appbox.php:786
+#: wp-appbox.php:761
 msgid "Plugin page"
 msgstr "Plugin-Seite"
 
-#: wp-appbox.php:787
+#: wp-appbox.php:762
 msgid "Rate the plugin"
 msgstr "Plugin bewerten"
 
-#: wp-appbox.php:788
+#: wp-appbox.php:763
 msgid "My Amazon Wishlist"
 msgstr "Mein Amazon-Wunschzettel"
 
-#: wp-appbox.php:822
+#: wp-appbox.php:797
 msgid "To use this plugin requires at least PHP version "
 msgstr "Zur Nutzung des Plugins wird mindestens PHP "
 
-#: wp-appbox.php:823
+#: wp-appbox.php:798
 msgid ""
 "\"cURL\" is disabled on this server, but is required. Please enable this "
 "feature (or contact your hoster)."
@@ -1332,7 +1319,7 @@ msgstr ""
 "\"cURL\" ist auf diesem Server deaktiviert, wird aber benötigt. Bitte "
 "aktiviere das Feature oder kontaktiere deinen Webhoster."
 
-#: wp-appbox.php:824
+#: wp-appbox.php:799
 msgid ""
 "\"curl_exec\" is disabled on this server, but is required. Please enable "
 "this feature (or contact your hoster)."
@@ -1340,13 +1327,19 @@ msgstr ""
 "\"curl_exec\" ist auf diesem Server deaktiviert, wird aber benötigt. Bitte "
 "aktiviere das Feature oder kontaktiere deinen Webhoster."
 
-#: wp-appbox.php:825
+#: wp-appbox.php:800
 msgid ""
 "\"json_decode\" is disabled on this server, but is required. Please enable "
 "this feature (or contact your hoster)."
 msgstr ""
 "\"json_decode\" ist auf diesem Server deaktiviert, wird aber benötigt. Bitte "
 "aktiviere das Feature oder kontaktiere deinen Webhoster."
+
+#~ msgid "GOG.com"
+#~ msgstr "GOG.com"
+
+#~ msgid "Steam"
+#~ msgstr "Steam"
 
 #~ msgid ""
 #~ "If you have an affiliate ID for Amazon and Windows Store, you can enter "

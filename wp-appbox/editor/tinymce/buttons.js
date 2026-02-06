@@ -2,15 +2,11 @@
 * Verschiedene Aktionen für die Buttons
 *
 * @since   	3.2.10
-* @changed  4.4.0
+* @changed  4.5.8
 */
 
 function wpAppbox_amazonapps_button() {
 	return "[appbox amazonapps " + tinyMCE.activeEditor.selection.getContent() + "]";
-}
-
-function wpAppbox_appgallery_button() {
-	return "[appbox appgallery " + tinyMCE.activeEditor.selection.getContent() + "]";
 }
 
 function wpAppbox_appstore_button() {
@@ -33,10 +29,6 @@ function wpAppbox_firefoxaddon_button() {
 	return "[appbox firefoxaddon " + tinyMCE.activeEditor.selection.getContent() + "]";
 }
 
-function wpAppbox_gog_button() {
-	return "[appbox gog " + tinyMCE.activeEditor.selection.getContent() + "]";
-}
-
 function wpAppbox_googleplay_button() {
 	return "[appbox googleplay " + tinyMCE.activeEditor.selection.getContent() + "]";
 }
@@ -53,10 +45,6 @@ function wpAppbox_snapcraft_button() {
 	return "[appbox snapcraft " + tinyMCE.activeEditor.selection.getContent() + "]";
 }
 
-function wpAppbox_steam_button() {
-	return "[appbox steam " + tinyMCE.activeEditor.selection.getContent() + "]";
-}
-
 function wpAppbox_wordpress_button() {
 	return "[appbox wordpress " + tinyMCE.activeEditor.selection.getContent() + "]";
 }
@@ -66,7 +54,7 @@ function wpAppbox_wordpress_button() {
 * WP-Appbox-Button für TinyMCE
 *
 * @since    3.2.10
-* @changed  4.4.0
+* @changed  4.5.8
 */
 
 if ( typeof wpappbox_combined_button != 'undefined' ) {
@@ -93,14 +81,8 @@ if ( typeof wpappbox_combined_button != 'undefined' ) {
 		if ( button_store_ids[i] == 'firefoxaddon' ) {
 			values.push( { text: button_store_names[i], onclick : function() { tinyMCE.activeEditor.execCommand('mceInsertContent', false, wpAppbox_firefoxaddon_button()); } } );
 		}
-		if ( button_store_ids[i] == 'gog' ) {
-			values.push( { text: button_store_names[i], onclick : function() { tinyMCE.activeEditor.execCommand('mceInsertContent', false, wpAppbox_gog_button()); } } );
-		}
 		if ( button_store_ids[i] == 'googleplay' ) {
 			values.push( { text: button_store_names[i], onclick : function() { tinyMCE.activeEditor.execCommand('mceInsertContent', false, wpAppbox_googleplay_button()); } } );
-		}
-		if ( button_store_ids[i] == 'appgallery' ) {
-			values.push( { text: button_store_names[i], onclick : function() { tinyMCE.activeEditor.execCommand('mceInsertContent', false, wpAppbox_appgallery_button()); } } );
 		}
 		if ( button_store_ids[i] == 'microsoftstore' ) {
 			values.push( { text: button_store_names[i], onclick : function() { tinyMCE.activeEditor.execCommand('mceInsertContent', false, wpAppbox_microsoftstore_button()); } } );
@@ -110,9 +92,6 @@ if ( typeof wpappbox_combined_button != 'undefined' ) {
 		}
 		if ( button_store_ids[i] == 'snapcraft' ) {
 			values.push( { text: button_store_names[i], onclick : function() { tinyMCE.activeEditor.execCommand('mceInsertContent', false, wpAppbox_snapcraft_button()); } } );
-		}
-		if ( button_store_ids[i] == 'steam' ) {
-			values.push( { text: button_store_names[i], onclick : function() { tinyMCE.activeEditor.execCommand('mceInsertContent', false, wpAppbox_steam_button()); } } );
 		}
 		if ( button_store_ids[i] == 'wordpress' ) {
 			values.push( { text: button_store_names[i], onclick : function() { tinyMCE.activeEditor.execCommand('mceInsertContent', false, wpAppbox_wordpress_button()); } } );
@@ -187,28 +166,12 @@ tinymce.create('tinymce.plugins.wpAppbox_StoreButtons', {
 			image: url + "/firefoxaddon.btn.png"
 		});
 		
-		ed.addButton('wpAppbox_GOGButton', {
-			title : 'GOG.com (Good Old Games) Appbox',
-			onclick : function() {
-				ed.execCommand('mceInsertContent', false, wpAppbox_gog_button());
-			},
-			image: url + "/gog.btn.png"
-		});
-		
 		ed.addButton('wpAppbox_GooglePlayButton', {
 			title : 'Google Play Appbox',
 			onclick : function() {
 				ed.execCommand('mceInsertContent', false, wpAppbox_googleplay_button());
 			},
 			image: url + "/googleplay.btn.png"
-		});
-		
-		ed.addButton('wpAppbox_AppGalleryButton', {
-			title : 'Huawei AppGallery Appbox',
-			onclick : function() {
-				ed.execCommand('mceInsertContent', false, wpAppbox_appgallery_button());
-			},
-			image: url + "/appgallery.btn.png"
 		});
 		
 		ed.addButton('wpAppbox_MicrosoftStoreButton', {
@@ -233,14 +196,6 @@ tinymce.create('tinymce.plugins.wpAppbox_StoreButtons', {
 				ed.execCommand('mceInsertContent', false, wpAppbox_snapcraft_button());
 			},
 			image: url + "/snapcraft.btn.png"
-		});
-		
-		ed.addButton('wpAppbox_SteamButton', {
-			title : 'Steam Appbox',
-			onclick : function() {
-				ed.execCommand('mceInsertContent', false, wpAppbox_steam_button());
-			},
-			image: url + "/steam.btn.png"
 		});
 		
 		ed.addButton('wpAppbox_WordPressButton', {

@@ -34,7 +34,7 @@ class wpAppbox_GetAppInfoAPI {
 	* Baut den Funktionsnamen zusammen und ruft die Funktionen zum Laden und Zurückgeben der App-Informationen auf
 	*
 	* @since   2.0.0
-	* @change  4.4.4
+	* @change  4.5.8
 	*
 	* @param   string  	$storeID  ID des Stores (z.B. "googleplay")
 	* @param   string  	$appID    ID der App
@@ -43,13 +43,7 @@ class wpAppbox_GetAppInfoAPI {
 	*/
 	
 	function getTheAppData( $storeID, $appID, $isCron = false ) {
-		switch ( $storeID ) {
-			case 'androidpit':
-				$storeID = 'googleplay';
-				break;
-			case 'goodoldgames':
-				$storeID = 'gog';
-				break;
+		switch ( $storeID ):
 			case 'windowsstore':
 			case 'windowsphone':
 				$storeID = 'microsoftstore';
@@ -61,10 +55,7 @@ class wpAppbox_GetAppInfoAPI {
 				$appID = str_replace( array( '-iphone', '-ipad', '-universal', '-watch', '-imessage', '-appletv', '-vision' ), '', $appID );
 				if ( substr( $appID, 0, 2 ) == 'id' )
 					$appID = substr( $appID, 2 );
-				if ( substr( $appID, 0, 8 ) == 'bundleid' )
-					$appID = str_replace( 'bundleid', 'bundle', $appID );
-				break;
-		}
+		endswitch;
 		//if ( !in_array( $wpAppbox_storeNames, $storeID ) ) return( false );
 		$cacheID = self::getCacheID( $storeID, $appID );
 		$thegetfunction = "get$storeID";
@@ -719,141 +710,13 @@ class wpAppbox_GetAppInfoAPI {
 		$appData['app_screenshots'] = $appScreenshots;
 		return( $appData );
 	}
-		
-	
-	/**
-	* Informationen von Good Old Games (GOG.com) auslesen
-	*
-	* @since   2.3.0
-	* @change  4.4.0
-	*
-	* @param   string  $appID    ID der App
-	* @param   string  $storeID  ID des Stores (wird fest vergeben)
-	* @return  array   $appData  Array der App-Daten
-	*/
-	
-	function getGOG( $appID, $cacheID, $storeID = 'gog' ) {
-		$pageURL = $this->getStoreURL( $storeID, $appID );
-		$thisContent = $this->getContent( $pageURL );
-		//wpAppbox_errorOutput( $thisContent );
-		$appData = array();
-		if ( isset( $thisContent['body'] ) && '200' == $thisContent['response']['code']) {
-			wpAppbox_errorOutput( 'function: getGOG() ---> Get app information' );
-			phpQuery::newDocumentHTML( $thisContent['body'] );
-			$error_found = pq( "title" )->html();
-			if ( strpos( $error_found, "404" ) !== false ) {
-				return( false );
-			}
-			$appTitle = pq( 'h1.productcard-basics__title' )->html();
-			$appURL = $pageURL;
-			
-			preg_match_all( '#\bhttps?://[^,\s()<>]+(?:\([\w\d]+\)|([^,[:punct:]\s]|/))#', pq( 'img.productcard-player__logo' )->attr( 'srcset' ), $appIconMatch );
-			$appIcon = $appIconMatch[0][0];
-			
-			$appPrice = pq( 'span.product-actions-price__final-amount' )->html();
-			$oldPrice = trim( pq( 'span.product-actions-price__base-amount' )->html() );
-			if ( '' != $oldPrice ) $appExtend['oldPrice'] = $oldPrice;
-			$appAuthor = pq( 'div.details__content.table__row-content a[href*="devpub"]:first' )->html();
-			$appAuthorURL = 'https://www.gog.com' . pq( 'div.details__content.table__row-content a[href*="devpub"]:first' )->attr( 'href' );
-			$appRating = pq( 'div[itemprop="aggregateRating"]:first' )->html();
-			if ( false !== strpos( $appRating, '/5' ) ) $appRating = Trim( str_replace( '/5', '', $appRating ) );
-			else $appRating = 0;
-			
-			$appScreenshots = array();
-			foreach ( pq( 'img.productcard-thumbnails-slider__image') as $appShots ):
-				$appScreenshot = pq( $appShots )->attr( 'src' );
-				if ( '' != Trim( $appScreenshot ) ):
-					$appScreenshots[] = trim( $appScreenshot );
-				endif;
-			endforeach;
-			//App-Daten in Array schreiben
-			$appData['id'] = $cacheID;
-			$appData['app_id'] = $appID;
-			$appData['app_url'] = $appURL;
-			$appData['app_icon'] = $appIcon;
-			$appData['app_title'] = trim( $appTitle );
-			$appData['app_author'] = trim( $appAuthor );
-			$appData['app_author_url'] = $appAuthorURL;
-			$appData['app_price'] = $appPrice;
-			$appData['app_rating'] = $appRating;
-			if ( isset( $appExtend ) ) $appData['app_extend'] = $appExtend;
-			$appData['store_name'] = 'GOG.com';
-			$appData['store_name_css'] = $storeID;
-			$appData['app_screenshots'] = $appScreenshots;
-			return( $appData );
-		}
-		wpAppbox_errorOutput( 'function: getGOG() ---> Get no app information (Statuscode ' . $thisContent['response']['code'] . ')' );
-		return( false );
-	}
-	
-	
-	/**
-	* Informationen aus dem Steam Store auslesen
-	*
-	* @since   1.8.5
-	* @change  4.4.15
-	*
-	* @param   string  $appID    ID der App
-	* @param   string  $storeID  ID des Stores (wird fest vergeben)
-	* @return  array   $appData  Array der App-Daten
-	*/
-	
-	function getSteam( $appID, $cacheID, $storeID = 'steam' ) {
-		$pageURL = $this->getStoreURL( $storeID, $appID );
-		$thisContent = $this->getContent( $pageURL );
-		$thisContent = $this->getContent( $pageURL );
-		$jsonContent = json_decode( $thisContent['body'] );
-		//wpAppbox_errorOutput( $thisContent );
-		$appData = array();
-		if ( true === $jsonContent->$appID->success ) {
-			wpAppbox_errorOutput( 'function: getSteam() ---> Get app information' );
-			$jsonContent = $jsonContent->$appID->data;
-			$appTitle = $jsonContent->name;
-			$appURL = 'http://store.steampowered.com/app/' . $appID . '/';
-			$appIcon = $jsonContent->header_image;
-			foreach ( $jsonContent->developers as $devs ) {
-				if ( !isset( $appAuthor ) ) $appAuthor = '';
-				/*$appAuthor .= ", <a href=\"http://store.steampowered.com/search/?developer=$devs\">$devs</a>";*/
-				$appAuthor .= ", $devs";
-			}
-			$appAuthor = substr( $appAuthor, 2 );
-			$currency = $jsonContent->price_overview->currency;
-			$appPrice = $jsonContent->price_overview->final / 100;
-			if ( 'EUR' == $currency ) {
-				$appPrice = str_replace( '.', ',', $appPrice ) . ' €';
-			} elseif ( 'USD' == $currency ) { 
-				$appPrice = '$ ' . $appPrice;
-			} else {
-				$appPrice = $appPrice.' '.$currency;
-			}
-			$appScreenshots = array();
-			foreach ( $jsonContent->screenshots as $appShots ) {
-				$appScreenshots[] = $appShots->path_thumbnail;
-			}
-			//App-Daten in Array schreiben
-			$appData['id'] = $cacheID;
-			$appData['app_id'] = $appID;
-			$appData['app_url'] = $appURL;
-			$appData['app_icon'] = $appIcon;
-			$appData['app_title'] = trim( $appTitle );
-			$appData['app_author'] = trim( $appAuthor );
-			$appData['app_price'] = $appPrice;
-			$appData['app_rating'] = '-1';
-			$appData['store_name'] = 'Steam';
-			$appData['store_name_css'] = $storeID;
-			$appData['app_screenshots'] = $appScreenshots;
-			return( $appData );
-		}
-		wpAppbox_errorOutput( 'function: getSteam() ---> Get no app information (Statuscode )' );
-		return( false );
-	}
 	
 	
 	/**
 	* Informationen aus Snapcraft auslesen
 	*
 	* @since   1.8.5
-	* @change  4.4.15
+	* @change  4.5.8
 	*
 	* @param   string  $appID    ID der App
 	* @param   string  $storeID  ID des Stores (wird fest vergeben)
@@ -908,7 +771,7 @@ class wpAppbox_GetAppInfoAPI {
 	* Informationen aus dem (Mac) App Store auslesen
 	*
 	* @since   1.0.0
-	* @change  4.4.17
+	* @change  4.5.8
 	*
 	* @param   string  $appID    ID der App
 	* @param   string  $storeID  ID des Stores (wird fest vergeben)
@@ -917,9 +780,6 @@ class wpAppbox_GetAppInfoAPI {
 	
 	function getAppStore( $appID, $cacheID, $storeID = 'appstore' ) {
 		$pageURL = $this->getStoreURL( $storeID, $appID );
-		if ( false !== strpos( $appID, "bundle" ) ) {
-			$pageURL = str_replace( '/idbundle', '-bundle/id', $pageURL );
-		}
 		$thisContent = $this->getContent( $pageURL );
 		//wpAppbox_errorOutput( $thisContent );
 		$appData = array();
@@ -930,112 +790,69 @@ class wpAppbox_GetAppInfoAPI {
 			if ( '' == $error_found ) {
 				return( false );
 			}
-			$jsonData = json_decode( pq( 'script[name="schema:software-application"][type="application/ld+json"]' )->html() );
+			$jsonData = json_decode( pq( 'script[id="software-application"][type="application/ld+json"]' )->html() );
 			$appExtend = array();
-			$appTitle = pq( 'meta[property="og:title"]' )->attr( 'content' );
+			$appTitle = $jsonData->name;
 			$appURL = pq( 'meta[property="og:url"]' )->attr( 'content' );			
-			preg_match_all( '#\bhttps?://[^,\s()<>]+(?:\([\w\d]+\)|([^,[:punct:]\s]|/))#', pq( 'picture[class*="-app-icon"] source:first' )->attr( 'srcset' ), $appIconMatch );
+			preg_match_all( '#\bhttps?://[^,\s()<>]+(?:\([\w\d]+\)|([^,[:punct:]\s]|/))#', pq( '.app-icon:first picture:first source:first' )->attr( 'srcset' ), $appIconMatch );
 			$appIcon = str_replace( '.webp' , '.png', $appIconMatch[0][0] );
 			$appAuthor = $jsonData->author->name;
 			$appAuthorURL = $jsonData->author->url;
-			if ( '' == $appAuthor ) {
-				$appAuthor = pq( 'h2.product-header__identity > a' )->text();
-				$appAuthorURL = pq( 'h2.product-header__identity > a' )->attr( 'href' );
-			}
 			if ( isset( $jsonData->aggregateRating->ratingValue ) )
 				$appRating = $jsonData->aggregateRating->ratingValue;
 			else $appRating = -1;
-			//if ( isset( $jsonData->offers->price ) && ( '0' == $jsonData->offers->price ) ) $appPrice = '0';
-			//else $appPrice = pq( 'li.app-header__list__item--price' )->html();	
-			$appPrice = pq( 'li.app-header__list__item--price' )->html();
+			$appPrice = explode( ' · ', pq( 'p.attributes:last' )->html() )[0];
 			if ( ( !strpos( $appPrice, '.' ) ) && ( !strpos( $appPrice, ',' ) ) ):
 				$appPrice = '0';
 			endif;
-			if ( ( false !== strpos( $appID, "bundle" ) && ( isset( $jsonData->offers->price ) ) ) ) {
-				$appPrice = $jsonData->offers->price;
-			}
-			if ( pq( 'header.app-header--arcade')->html() ) $appExtend['apple-arcade'] = true;
-			if ( '' != pq( 'li.app-header__list__item--in-app-purchase')->html() ) $appHasIAP = true;
+			if ( '' != pq( '#information a[data-test-id="internal-link"][href$="id1436214772"]')->html() ) $appHasIAP = true;
 			else $appHasIAP = '0';
-			/* Deprecated - Thanks to Apple
-			if ( isset( $jsonData->data->attributes->isSiriSupported ) )
-				$appExtend['issirisupported'] = true;
-			if ( isset( $jsonData->data->attributes->isAppleWatchSupported ) )
-				$appExtend['watchapp'] = true;
-			if ( isset( $jsonData->data->attributes->isPreorder ) )
-				$appExtend['ispreorder'] = true;
-			if ( isset( $jsonData->data->attributes->hasMessagesExtension ) )
-				$appExtend['imessageapp'] = true;
-			if ( isset( $jsonData->data->attributes->isHiddenFromSpringboard ) )
-				$appExtend['imessage-only'] = true;
-			if ( in_array( 'tvos', $jsonData->data->attributes->deviceFamilies ) )
-				$appExtend['appletv'] = true;
-			if ( isset( $jsonData->data->attributes->deviceFamilies ) && ( 1 == count( $jsonData->data->attributes->deviceFamilies ) ) && ( 'tvos' == $jsonData->data->attributes->deviceFamilies['0'] ) )	
-				$appExtend['appletvonly'] = true;
-			*/
-			if ( "Mac App Store" === pq( 'meta[property="og:site_name"]' )->attr( 'content' ) ) {
-				$storeName = 'Mac App Store';
-				$storeNameCSS = 'macappstore';
-			} else {
-				$storeName = 'App Store';
-				$storeNameCSS = 'appstore';
-			}
-			$appScreenshots = array();
-			if ( 'macappstore' == $storeNameCSS ):
-				foreach ( pq( '.we-artwork--screenshot-platform-mac source:not([media])') as $appShots ):
-					preg_match_all( '#\bhttps?://[^,\s()<>]+(?:\([\w\d]+\)|([^,[:punct:]\s]|/))#', pq( $appShots )->attr( 'srcset' ), $appScreenshotMatch );
-					$appScreenshot = str_replace( '.webp' , '.png', $appScreenshotMatch[0][0] );
-					$appScreenshots[] = $appScreenshot;
-				endforeach;
-			endif;
-			foreach ( pq( 'li.gallery-nav__item a.ember-view' ) as $appShots ):
-				$tempContent = $this->getContent( 'https://apps.apple.com' . pq( $appShots )->attr('href') );
+			$appScreenshots = array();			
+			$allPlatforms = array_map( 'trim', explode( ',', pq( 'div.all-platforms-names' )->html() ) );
+			//Posible Names: iPhone, iPad, iMessage, Apple Vision, Mac, Apple Watch, Apple TV
+			foreach ( $allPlatforms as $platformName ):	
+				if ( 'iMessage' == $platformName ) break;
+				$platformName = strtolower( preg_replace( '/^Apple\s*/u', '', $platformName ) );
+				$tempContent = $this->getContent( $appURL . '?platform=' . $platformName );
 				if ( isset( $tempContent['body'] ))
 					phpQuery::newDocumentHTML( $tempContent['body'] );
-				else break;
-				foreach ( pq( '.we-artwork--screenshot-platform-iphone source[type=\'image/webp\']:not([media])') as $appShots ):
+				else break;								
+				foreach ( pq( '#product_media_phone_ source[type=\'image/webp\']:not([media])') as $appShots ):
 					preg_match_all( '#\bhttps?://[^,\s()<>]+(?:\([\w\d]+\)|([^,[:punct:]\s]|/))#', pq( $appShots )->attr( 'srcset' ), $appScreenshotMatch );
 					$appScreenshot = str_replace( '.webp' , '.png', $appScreenshotMatch[0][0] );
 					$appScreenshots['iphone'][] = $appScreenshot;
-				endforeach;
-				foreach ( pq( '.we-artwork--screenshot-platform-ipad source[type=\'image/webp\']:not([media])') as $appShots ):
+				endforeach;				
+				foreach ( pq( '#product_media_pad_ source[type=\'image/webp\']:not([media])') as $appShots ):
 					preg_match_all( '#\bhttps?://[^,\s()<>]+(?:\([\w\d]+\)|([^,[:punct:]\s]|/))#', pq( $appShots )->attr( 'srcset' ), $appScreenshotMatch );
 					$appScreenshot = str_replace( '.webp' , '.png', $appScreenshotMatch[0][0] );
 					$appScreenshots['ipad'][] = $appScreenshot;
-				endforeach;
-				foreach ( pq( '.we-artwork--screenshot-platform-apple-watch source[type=\'image/webp\']:not([media])') as $appShots ):
+				endforeach;				
+				foreach ( pq( '#product_media_watch_ source[type=\'image/webp\']:not([media])') as $appShots ):
 					preg_match_all( '#\bhttps?://[^,\s()<>]+(?:\([\w\d]+\)|([^,[:punct:]\s]|/))#', pq( $appShots )->attr( 'srcset' ), $appScreenshotMatch );
 					$appScreenshot = str_replace( '.webp' , '.png', $appScreenshotMatch[0][0] );
 					$appScreenshots['watch'][] = $appScreenshot;
 				endforeach;
-				foreach ( pq( '.we-artwork--screenshot-platform-messages source[type=\'image/webp\']:not([media])') as $appShots ):
+				foreach ( pq( '#product_media_messages_ source[type=\'image/webp\']:not([media])') as $appShots ):
 					preg_match_all( '#\bhttps?://[^,\s()<>]+(?:\([\w\d]+\)|([^,[:punct:]\s]|/))#', pq( $appShots )->attr( 'srcset' ), $appScreenshotMatch );
 					$appScreenshot = str_replace( '.webp' , '.png', $appScreenshotMatch[0][0] );
 					$appScreenshots['imessage'][] = $appScreenshot;
 				endforeach;
-				foreach ( pq( '.we-artwork--screenshot-platform-apple-vision-pro source[type=\'image/webp\']:not([media])') as $appShots ):
+				foreach ( pq( '#product_media_vision_ source[type=\'image/webp\']:not([media])') as $appShots ):
 					preg_match_all( '#\bhttps?://[^,\s()<>]+(?:\([\w\d]+\)|([^,[:punct:]\s]|/))#', pq( $appShots )->attr( 'srcset' ), $appScreenshotMatch );
 					$appScreenshot = str_replace( '.webp' , '.png', $appScreenshotMatch[0][0] );
-					$appScreenshots['visionpro'][] = $appScreenshot;
+					$appScreenshots['vision'][] = $appScreenshot;
 				endforeach;
-				foreach ( pq( '.we-artwork--screenshot-platform-apple-tv source[type=\'image/webp\']:not([media])') as $appShots ):
+				foreach ( pq( '#product_media_tv_ source[type=\'image/webp\']:not([media])') as $appShots ):
 					preg_match_all( '#\bhttps?://[^,\s()<>]+(?:\([\w\d]+\)|([^,[:punct:]\s]|/))#', pq( $appShots )->attr( 'srcset' ), $appScreenshotMatch );
 					$appScreenshot = str_replace( '.webp' , '.png', $appScreenshotMatch[0][0] );
 					$appScreenshots['appletv'][] = $appScreenshot;
 				endforeach;
-				foreach ( pq( '.we-artwork--screenshot-platform-mac source[type=\'image/webp\']:not([media])') as $appShots ):
+				foreach ( pq( '#product_media_mac_ source[type=\'image/webp\']:not([media])') as $appShots ):
 					preg_match_all( '#\bhttps?://[^,\s()<>]+(?:\([\w\d]+\)|([^,[:punct:]\s]|/))#', pq( $appShots )->attr( 'srcset' ), $appScreenshotMatch );
 					$appScreenshot = str_replace( '.webp' , '.png', $appScreenshotMatch[0][0] );
 					$appScreenshots['mac'][] = $appScreenshot;
 				endforeach;
 			endforeach;
-			if ( empty( $appScreenshots ) ):
-				foreach ( pq( '.we-screenshot-viewer__screenshots source[type=\'image/webp\']:not([media])') as $appShots ):
-					preg_match_all( '#\bhttps?://[^,\s()<>]+(?:\([\w\d]+\)|([^,[:punct:]\s]|/))#', pq( $appShots )->attr( 'srcset' ), $appScreenshotMatch );
-					$appScreenshot = str_replace( '.webp' , '.png', $appScreenshotMatch[0][0] );
-					$appScreenshots['appletv'][] = $appScreenshot;
-				endforeach;
-			endif;
 			//App-Daten in Array schreiben
 			$appData['id'] = $cacheID;
 			$appData['app_id'] = $appID;
@@ -1048,8 +865,8 @@ class wpAppbox_GetAppInfoAPI {
 			$appData['app_has_iap'] = $appHasIAP;
 			$appData['app_extend'] = $appExtend;
 			$appData['app_rating'] = $appRating;
-			$appData['store_name'] = $storeName;
-			$appData['store_name_css'] = $storeNameCSS;
+			$appData['store_name'] = 'App Store';
+			$appData['store_name_css'] = 'appstore';
 			$appData['app_screenshots'] = $appScreenshots;			
 			return( $appData );
 		}
@@ -1304,7 +1121,7 @@ class wpAppbox_GetAppInfoAPI {
 	* Informationen aus den Edge-Add-Ons auslesen
 	*
 	* @since   4.4.0
-	* @change  n/a
+	* @change  4.5.10
 	*
 	* @param   string  $appID    ID der App
 	* @param   string  $storeID  ID des Stores (wird fest vergeben)
@@ -1323,7 +1140,7 @@ class wpAppbox_GetAppInfoAPI {
 			$appURL = $pageURL;
 			$appTitle = $jsonContent->name;
 			$appRating = $jsonContent->averageRating;
-			$appIcon = $jsonContent->thumbnail;
+			$appIcon = $jsonContent->logoUrl;
 			$appAuthor = $jsonContent->developer;
 			$appPrice = '0';
 			$appScreenshots = array();
@@ -1348,59 +1165,6 @@ class wpAppbox_GetAppInfoAPI {
 			wpAppbox_errorOutput( 'function: getEdgeAddons() ---> Access denied (403)' );
 		}
 		wpAppbox_errorOutput( 'function: getEdgeAddons() ---> Get no app information (Statuscode ' . $thisContent['response']['code'] . ')' );
-		return( false );
-	}
-		
-	
-	/**
-	* Informationen aus der Huawei App Gallery auslesen
-	*
-	* @since   4.4.0
-	* @change  n/a
-	*
-	* @param   string  $appID    ID der App
-	* @param   string  $storeID  ID des Stores (wird fest vergeben)
-	* @return  array   $appData  Array der App-Daten
-	*/
-	
-	function getAppGallery( $appID, $cacheID, $storeID = 'appgallery' ) {
-		$pageURL = $this->getStoreURL( $storeID, $appID );
-		//https://web-dre.hispace.dbankcloud.cn/uowap/index?method=internal.getTabDetail&serviceType=20&reqPageNum=1&maxResults=1&uri=app|C105581953&shareTo=&currentUrl=https%3A%2F%2Fappgallery.huawei.com%2Fapp%2FC105581953&accessId=&appid=C105581953&zone=&locale=de
-		$jsonURL = 'https://web-dre.hispace.dbankcloud.cn/uowap/index?method=internal.getTabDetail&serviceType=20&reqPageNum=1&maxResults=1&uri=app|'. $appID . '&shareTo=&currentUrl=https%3A%2F%2Fappgallery.huawei.com%2Fapp%2F'. $appID . '&accessId=&appid='. $appID . '&zone=&locale=de';
-		$thisContent = $this->getContent( $jsonURL );
-		$jsonContent = json_decode( $thisContent['body'] );
-		//wpAppbox_errorOutput( $thisContent );
-		$appData = array();
-		if ( isset( $jsonContent->layoutData[0]->dataList[0]->name ) ) {
-			wpAppbox_errorOutput( 'function: getAppGallery() ---> Get app information' );
-			$appURL = $pageURL;
-			$appTitle = $jsonContent->layoutData[0]->dataList[0]->name;
-			$appRating = $jsonContent->layoutData[0]->dataList[0]->stars;
-			$appIcon = $jsonContent->layoutData[0]->dataList[0]->icoUri;
-			$appPrice = $jsonContent->layoutData[1]->dataList[0]->price;
-			$appAuthor = $jsonContent->layoutData[3]->dataList[0]->developer;
-			$appScreenshots = array();
-			foreach ( $jsonContent->layoutData[2]->dataList[0]->images as $appShots ) {
-				$appScreenshots[] = $appShots;
-			}
-			//App-Daten in Array schreiben
-			$appData['id'] = $cacheID;
-			$appData['app_id'] = $appID;
-			$appData['app_url'] = $appURL;
-			$appData['app_icon'] = $appIcon;
-			$appData['app_title'] = trim( $appTitle );
-			$appData['app_author'] = trim( $appAuthor );
-			$appData['app_rating'] = $appRating;
-			$appData['app_price'] = trim( $appPrice );
-			$appData['store_name'] = 'Huawei AppGallery';
-			$appData['store_name_css'] = $storeID;
-			$appData['app_screenshots'] = $appScreenshots;
-			return( $appData );
-		}
-		if ( isset( $thisContent['body'] ) && '403' == $thisContent['response']['code'] ) {
-			wpAppbox_errorOutput( 'function: getAppGallery() ---> Access denied (403)' );
-		}
-		wpAppbox_errorOutput( 'function: getAppGallery() ---> Get no app information (Statuscode ' . $thisContent['response']['code'] . ')' );
 		return( false );
 	}
 	

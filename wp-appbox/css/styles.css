@@ -415,19 +415,9 @@ div.wpappbox div.appdetails span.oldprice {
     text-decoration: line-through;
 }
 
-div.wpappbox.appgallery a.applinks,
-div.wpappbox.appgallery div.applinks {
-    background-image: url(../img/appgallery.png);
-}
-
 div.wpappbox.appstore a.applinks,
 div.wpappbox.appstore div.applinks {
     background-image: url(../img/appstore.png);
-}
-
-div.wpappbox.macappstore a.applinks,
-div.wpappbox.macappstore div.applinks {
-    background-image: url(../img/macappstore.png);
 }
 
 div.wpappbox.apple-arcade span.price img.apple-arcade-logo {
@@ -437,11 +427,6 @@ div.wpappbox.apple-arcade span.price img.apple-arcade-logo {
 div.wpappbox.googleplay a.applinks,
 div.wpappbox.googleplay div.applinks {
     background-image: url(../img/googleplay.png);
-}
-
-div.wpappbox.gog a.applinks,
-div.wpappbox.gog div.applinks {
-    background-image: url(../img/gog.png);
 }
 
 div.wpappbox.microsoftstore a.applinks,
@@ -482,11 +467,6 @@ div.wpappbox.amazonalexa div.applinks {
 div.wpappbox.wordpress a.applinks,
 div.wpappbox.wordpress div.applinks {
     background-image: url(../img/wordpress.png);
-}
-
-div.wpappbox.steam a.applinks,
-div.wpappbox.steam div.applinks {
-    background-image: url(../img/steam.png);
 }
 
 div.wpappbox.snapcraft a.applinks,
@@ -559,29 +539,14 @@ only screen and (min-resolution:240dpi) {
         background-image: url(../img/stars-sprites-colorful@2x.png)
     }
     
-    div.wpappbox.appgallery a.applinks,
-    div.wpappbox.appgallery div.applinks {
-        background-image: url(../img/appgallery@2x.png)
-    }
-    
     div.wpappbox.appstore a.applinks,
     div.wpappbox.appstore div.applinks {
         background-image: url(../img/appstore@2x.png)
     }
     
-    div.wpappbox.macappstore a.applinks,
-    div.wpappbox.macappstore div.applinks {
-        background-image: url(../img/macappstore@2x.png)
-    }
-    
     div.wpappbox.googleplay a.applinks,
     div.wpappbox.googleplay div.applinks {
         background-image: url(../img/googleplay@2x.png)
-    }
-    
-    div.wpappbox.gog a.applinks,
-    div.wpappbox.gog div.applinks {
-        background-image: url(../img/gog@2x.png)
     }
     
     div.wpappbox.microsoftstore a.applinks,
@@ -629,11 +594,6 @@ only screen and (min-resolution:240dpi) {
         background-image: url(../img/snapcraft@2x.png)
     }
     
-    div.wpappbox.steam a.applinks,
-    div.wpappbox.steam div.applinks {
-        background-image: url(../img/steam@2x.png)
-    }
-    
     div.wpappbox.operaaddons a.applinks,
     div.wpappbox.operaaddons div.applinks {
         background-image: url(../img/operaaddons@2x.png)
@@ -669,11 +629,6 @@ only screen and (min-resolution:240dpi) {
         padding-left: 18px
     }
     
-    div.appgallery a.apptitle {
-        background: url(../img/appgallery-small.png);
-        padding-left: 18px
-    }
-    
     div.appstore a.apptitle {
         background: url(../img/appstore-small.png);
         padding-left: 18px
@@ -699,29 +654,14 @@ only screen and (min-resolution:240dpi) {
         padding-left: 17px
     }
     
-    div.gog a.apptitle {
-        background: url(../img/gog-small.png);
-        padding-left: 33px
-    }
-    
     div.googleplay a.apptitle {
         background: url(../img/googleplay-small.png);
-        padding-left: 18px
-    }
-    
-    div.macappstore a.apptitle {
-        background: url(../img/macappstore-small.png);
         padding-left: 18px
     }
     
     div.operaaddons a.apptitle {
         background: url(../img/operaaddons-small.png);
         padding-left: 16px
-    }
-    
-    div.steam a.apptitle {
-        background: url(../img/steam-small.png);
-        padding-left: 23px
     }
     
     div.snapcraft a.apptitle {
@@ -750,10 +690,6 @@ only screen and (min-resolution:240dpi) {
             background: url(../img/amazonalexa-small@2x.png)
         }
         
-        div.appgallery a.apptitle {
-            background: url(../img/appgallery-small@2x.png)
-        }
-        
         div.appstore a.apptitle {
             background: url(../img/appstore-small@2x.png)
         }
@@ -774,16 +710,8 @@ only screen and (min-resolution:240dpi) {
             background: url(../img/firefoxaddon-small@2x.png)
         }
         
-        div.gog a.apptitle {
-            background: url(../img/gog-small@2x.png)
-        }
-        
         div.googleplay a.apptitle {
             background: url(../img/googleplay-small@2x.png)
-        }
-        
-        div.macappstore a.apptitle {
-            background: url(../img/macappstore-small@2x.png)
         }
         
         div.operaaddons a.apptitle {
@@ -792,10 +720,6 @@ only screen and (min-resolution:240dpi) {
         
         div.snapcraft a.apptitle {
             background: url(../img/snapcraft-small@2x.png)
-        }
-        
-        div.steam a.apptitle {
-            background: url(../img/steam-small@2x.png)
         }
         
         div.microsoftstore a.apptitle {

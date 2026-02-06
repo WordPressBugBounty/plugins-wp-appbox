@@ -1,7 +1,7 @@
 <?php 
 
-
 /* ID => Bezeichnung */
+global $wpAppbox_storeURL_languages;
 $wpAppbox_storeURL_languages = array(
 	'0' => __('Use own URL', 'wp-appbox'),
 	'1' => array( 'code' => 'de-DE', 'name' => __( 'Germany', 'wp-appbox' ) ),
@@ -23,28 +23,12 @@ $wpAppbox_storeURL_languages = array(
 	
 	
 /* Stores ohne Möglichkeit des Sprachwechsels */
-$wpAppbox_storeURL_noLanguages = array( 'wordpress', 'gog', 'snapcraft', 'amazonapps' );	
+global $wpAppbox_storeURL_noLanguages;
+$wpAppbox_storeURL_noLanguages = array( 'wordpress', 'snapcraft', 'amazonapps' );	
 	
 /* Die URLs der Stores und Länder */
 global $wpAppbox_storeURL; 
 $wpAppbox_storeURL = array(
-	'appgallery' => array(
-		'1' => 'https://appgallery.huawei.com/app/{APPID}?locale=de',
-		'2' => 'https://appgallery.huawei.com/app/{APPID}?locale=us',
-		'3' => 'https://appgallery.huawei.com/app/{APPID}?locale=uk',
-		'4' => 'https://appgallery.huawei.com/app/{APPID}?locale=fr',
-		'5' => 'https://appgallery.huawei.com/app/{APPID}?locale=es',
-		'6' => 'https://appgallery.huawei.com/app/{APPID}?locale=ru',
-		'7' => 'https://appgallery.huawei.com/app/{APPID}?locale=tr',
-		'8' => 'https://appgallery.huawei.com/app/{APPID}?locale=it',
-		'9' => 'https://appgallery.huawei.com/app/{APPID}?locale=at',
-		'10' => 'https://appgallery.huawei.com/app/{APPID}?locale=ch',
-		'11' => 'https://appgallery.huawei.com/app/{APPID}?locale=jp',
-		'12' => 'https://appgallery.huawei.com/app/{APPID}?locale=pl',
-		'13' => 'https://appgallery.huawei.com/app/{APPID}?locale=au',
-		'14' => 'https://appgallery.huawei.com/app/{APPID}?locale=cn',
-		'15' => 'https://appgallery.huawei.com/app/{APPID}?locale=id'
-	),
 	'appstore' => array(
 		'1' => 'https://apps.apple.com/de/app/id{APPID}',
 		'2' => 'https://apps.apple.com/app/id{APPID}',
@@ -116,9 +100,6 @@ $wpAppbox_storeURL = array(
 		'14' => 'https://addons.mozilla.org/zh-CN/firefox/addon/{APPID}/',
 		'15' => 'https://addons.mozilla.org/id/firefox/addon/{APPID}/'
 	),
-	'gog' => array(
-		'1' => 'http://www.gog.com/game/{APPID}'
-	),
 	'googleplay' => array(
 		'1' => 'https://play.google.com/store/apps/details?id={APPID}&hl=de&gl=de',
 		'2' => 'https://play.google.com/store/apps/details?id={APPID}&hl=en&gl=us',
@@ -164,18 +145,6 @@ $wpAppbox_storeURL = array(
 	),
 	'snapcraft' => array(
 		'1' => 'https://snapcraft.io/{APPID}'
-	),
-	'steam' => array(
-		'1' => 'https://store.steampowered.com/api/appdetails/?appids={APPID}&cc=de&l=german',
-		'2' => 'https://store.steampowered.com/api/appdetails/?appids={APPID}&cc=us&l=english',
-		'3' => 'https://store.steampowered.com/api/appdetails/?appids={APPID}&cc=uk&l=english',
-		'4' => 'https://store.steampowered.com/api/appdetails/?appids={APPID}&cc=fr&l=french',
-		'5' => 'https://store.steampowered.com/api/appdetails/?appids={APPID}&cc=es&l=spanish',
-		'6' => 'https://store.steampowered.com/api/appdetails/?appids={APPID}&cc=ru&l=russian',
-		'7' => 'https://store.steampowered.com/api/appdetails/?appids={APPID}&cc=tr&l=turkey',
-		'8' => 'https://store.steampowered.com/api/appdetails/?appids={APPID}&cc=it&l=italian',
-		'11' => 'https://store.steampowered.com/api/appdetails/?appids={APPID}&cc=jp&l=japanese',
-		'14' => 'https://store.steampowered.com/api/appdetails/?appids={APPID}&cc=cn&l=schinese'
 	),
 	'wordpress' => array(
 		'1' => 'https://wordpress.org/plugins/{APPID}/'

@@ -303,7 +303,7 @@ class wpAppbox_CreateOutput {
 				$appScreenshots['watch'][] = '';
 				$appScreenshots['imessage'][] = '';
 				$appScreenshots['appletv'][] = '';
-				$appScreenshots['visionpro'][] = '';
+				$appScreenshots['vision'][] = '';
 				$appScreenshots[] = '';
 				switch ( $appType ):
 				case 'mac':
@@ -324,11 +324,11 @@ class wpAppbox_CreateOutput {
 				case 'appletv':
 					$appScreenshots = $appScreenshots['appletv'];
 					break;
-				case 'visionpro':
-					$appScreenshots = $appScreenshots['visionpro'];
+				case 'vision':
+					$appScreenshots = $appScreenshots['vision'];
 					break;
 				default:
-					$appScreenshots = array_merge( $appScreenshots['mac'], $appScreenshots['iphone'], $appScreenshots['ipad'], $appScreenshots['imessage'], $appScreenshots['watch'], $appScreenshots['visionpro'], $appScreenshots['appletv'] );
+					$appScreenshots = array_merge( $appScreenshots['mac'], $appScreenshots['iphone'], $appScreenshots['ipad'], $appScreenshots['imessage'], $appScreenshots['watch'], $appScreenshots['vision'], $appScreenshots['appletv'] );
 					break;
 				endswitch;
 				break;
@@ -466,7 +466,7 @@ class wpAppbox_CreateOutput {
 	* Rückgabe der eigentlich Appbox
 	*
 	* @since   2.0.0
-	* @change  4.4.17
+	* @change  4.5.8
 	*
 	* @param   array   $attr      Attribute des Shortcodes [WordPress]
 	* @return  string  $template  Rückgabe des fertigen Templates
@@ -486,8 +486,6 @@ class wpAppbox_CreateOutput {
 		$appType = '';
 		switch ( $attr['store'] ):
 			case 'appstore':
-				if ( $attr['bundle'] == true )
-					$attr['appid'] = 'bundle' . $attr['appid'];
 				if ( preg_match( '/-iphone/', $attr['appid'] ) ) {
 					$appType = 'iphone';
 				} else if ( preg_match( '/-ipad/', $attr['appid'] ) ) {
@@ -498,12 +496,12 @@ class wpAppbox_CreateOutput {
 					$appType = 'imessage';
 				} else if ( preg_match( '/-appletv/', $attr['appid'] ) ) {
 					$appType = 'appletv';
-				} else if ( preg_match( '/-visionpro/', $attr['appid'] ) ) {
-					$appType = 'visionpro';
+				} else if ( preg_match( '/-vision/', $attr['appid'] ) ) {
+					$appType = 'vision';
 				} else {
 					$appType = 'universal';
 				}
-				$attr['appid'] = str_replace( array( '-iphone', '-ipad', '-universal', '-watch', '-imessage', '-appletv', '-visionpro' ), '', $attr['appid'] );
+				$attr['appid'] = str_replace( array( '-iphone', '-ipad', '-universal', '-watch', '-imessage', '-appletv', '-vision' ), '', $attr['appid'] );
 				if( 'id' == substr( $attr['appid'], 0, 2 ) ) {
 					$attr['appid'] = substr( $attr['appid'], 2 );
 				}

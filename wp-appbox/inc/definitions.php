@@ -1,25 +1,6 @@
 <?php
 
 /**
-* Für das shice Tabellen-Prefix von WordPress
-*/
-
-global $wpdb;
-
-
-/**
-* Ein paar Definitionen #YOLO
-*/
-
-define( 'WPAPPBOX_MIN_PHPVERSION', '7.4' );
-define( 'WPAPPBOX_PLUGIN_NAME', 'WP-Appbox' ); 
-define( 'WPAPPBOX_PLUGIN_VERSION', '4.5.7' );
-define( 'WPAPPBOX_DB_VERSION', '1.0.4' );
-define( 'WPAPPBOX_PREFIX', 'wpAppbox_' );
-define( 'WPAPPBOX_TABLE_NAME', 'appbox' );
-
-
-/**
 * Festlegen der Standard-Einstellungen
 */
 
@@ -86,16 +67,13 @@ define( 'WPAPPBOX_CACHE_DIR', content_url() . '/cache/wp-appbox/' );
 global $wpAppbox_storeNames;	
 $wpAppbox_storeNames = array(	
 	'amazonapps' => __( 'Amazon Apps', 'wp-appbox' ),
-	'appgallery' => __( 'Huawei AppGallery', 'wp-appbox' ),
-	'appstore' => __( '(Mac) App Store', 'wp-appbox' ),
+	'appstore' => __( 'App Store', 'wp-appbox' ),
 	'chromewebstore' => __( 'Chrome Web Store', 'wp-appbox' ),
 	'edgeaddons' => __( 'Edge-Add-Ons', 'wp-appbox' ),
 	'fdroid' => __( 'F-Droid', 'wp-appbox' ),
 	'firefoxaddon' => __( 'Firefox Add-ons', 'wp-appbox' ),
-	'gog' => __( 'GOG.com', 'wp-appbox' ),
 	'googleplay' => __( 'Google Play Apps', 'wp-appbox' ),
 	'operaaddons' => __( 'Opera Add-ons', 'wp-appbox' ),
-	'steam' => __( 'Steam', 'wp-appbox' ),
 	'snapcraft' => __( 'Snapcraft', 'wp-appbox' ),
 	'microsoftstore' => __( 'Microsoft Store', 'wp-appbox' ),
 	'wordpress' => __( 'WordPress Plugins', 'wp-appbox' )
@@ -122,19 +100,16 @@ $wpAppbox_styleNames = array(
 		
 global $wpAppbox_storeStyles;
 $wpAppbox_storeStyles = array(	
-	'appgallery' => array( 1, 2, 3, 4 ),
 	'amazonapps' => array( 1, 2, 3, 4 ),
 	'appstore' => array( 1, 2, 3, 4 ),
 	'chromewebstore' => array( 1, 2, 3, 4 ),
 	'edgeaddons' => array( 1, 2, 3, 4 ),
 	'fdroid' => array( 1, 2, 3, 4 ),
 	'firefoxaddon' => array( 1, 2, 3, 4 ),
-	'gog' => array( 1, 2, 3, 4 ),
 	'googleplay' => array( 1, 2, 3, 4 ),
 	'microsoftstore' => array( 1, 2, 3, 4 ),
 	'operaaddons' => array( 1, 2, 3, 4 ),
 	'snapcraft' => array( 1, 2, 3, 4 ),
-	'steam' => array( 1, 2, 3, 4 ),
 	'wordpress' => array( 1, 2, 3, 4 )
 );
 

@@ -17,8 +17,6 @@ function wpAppbox_addSingleButtons( $buttons ) {
 	if ( '0' == $defaultOption || '3' == $defaultOption ):
 		if ( '0' == $defaultOption || ( isset( $forceSingle ) && $forceSingle == 'amazonapps' ) || get_option('wpAppbox_buttonWYSIWYG_amazonapps') && get_option('wpAppbox_amaAPIuse') )
 			array_push( $buttons, 'wpAppbox_AmazonAppsButton' );
-		if ( '0' == $defaultOption || ( isset( $forceSingle ) && $forceSingle == 'appgallery' ) || get_option('wpAppbox_buttonWYSIWYG_appgallery') )
-			array_push( $buttons, 'wpAppbox_AppGalleryButton' );
 		if ( '0' == $defaultOption || ( isset( $forceSingle ) && $forceSingle == 'appstore' ) || get_option('wpAppbox_buttonWYSIWYG_appstore') )
 			array_push( $buttons, 'wpAppbox_AppStoreButton' );
 		if ( '0' == $defaultOption || ( isset( $forceSingle ) && $forceSingle == 'chromewebstore' ) || get_option('wpAppbox_buttonWYSIWYG_chromewebstore') )
@@ -29,16 +27,12 @@ function wpAppbox_addSingleButtons( $buttons ) {
 			array_push( $buttons, 'wpAppbox_FDroidButton' );
 		if ( '0' == $defaultOption || ( isset( $forceSingle ) && $forceSingle == 'firefoxaddon' ) || get_option('wpAppbox_buttonWYSIWYG_firefoxaddon') )
 			array_push( $buttons, 'wpAppbox_FirefoxAddonButton' );
-		if ( '0' == $defaultOption || ( isset( $forceSingle ) && $forceSingle == 'gog' ) || get_option('wpAppbox_buttonWYSIWYG_gog') )
-			array_push( $buttons, 'wpAppbox_GOGButton' );
 		if ( '0' == $defaultOption || ( isset( $forceSingle ) && $forceSingle == 'googleplay' ) || get_option('wpAppbox_buttonWYSIWYG_googleplay') )
 			array_push( $buttons, 'wpAppbox_GooglePlayButton' );
 		if ( '0' == $defaultOption || ( isset( $forceSingle ) && $forceSingle == 'microsoftstore' ) || get_option('wpAppbox_buttonWYSIWYG_microsoftstore') )
 			array_push( $buttons, 'wpAppbox_MicrosoftStoreButton' );
 		if ( '0' == $defaultOption || ( isset( $forceSingle ) && $forceSingle == 'operaaddons' ) || get_option('wpAppbox_buttonWYSIWYG_operaaddons') )
 			array_push( $buttons, 'wpAppbox_OperaAddonsButton' );
-		if ( '0' == $defaultOption || ( isset( $forceSingle ) && $forceSingle == 'steam' ) || get_option('wpAppbox_buttonWYSIWYG_steam') )
-			array_push( $buttons, 'wpAppbox_SteamButton' );
 		if ( '0' == $defaultOption || ( isset( $forceSingle ) && $forceSingle == 'snapcraft' ) || get_option('wpAppbox_buttonWYSIWYG_snapcraft') )
 			array_push( $buttons, 'wpAppbox_SnapcraftButton' );
 		if ( '0' == $defaultOption || ( isset( $forceSingle ) && $forceSingle == 'wordpress' ) || get_option('wpAppbox_buttonWYSIWYG_wordpress') )
