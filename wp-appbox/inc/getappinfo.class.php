@@ -368,22 +368,20 @@ class wpAppbox_GetAppInfoAPI {
 	* Gibt einen zufälligen User-Agent zurück (Standart: User-Agent des Nutzers)
 	*
 	* @since   4.0.1
-	* @change  4.2.0
+	* @change  4.5.11
 	*
 	* @return  string   $userAgent  	User-Agent-String
 	*/
 	
 	function getUserAgent() {
 		$array_userAgent = array( 
-							'Mozilla/1.22 (compatible; MSIE 10.0; Windows 3.1)',
-							'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:75.0) Gecko/20100101 Firefox/75.0',
-							'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36 OPR/67.0.3575.97',
-							'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:73.0) Gecko/20100101 Firefox/73.0',
-							'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_3) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.5 Safari/605.1.15',
-							'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.3',
-							'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36',
-							'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36',
-							'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36 Edg/80.0.361.109'
+							'Mozilla/5.0 (iPhone; CPU iPhone OS 18_7_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.0 EdgiOS/146.3856.102 Mobile/15E148 Safari/605.1.15',
+							'Mozilla/5.0 (Linux; Android 10; ONEPLUS A6003) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.7680.178 Mobile Safari/537.36 EdgA/146.0.3856.97',
+							'Mozilla/5.0 (Linux; Android 10; Pixel 3 XL) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.7680.178 Mobile Safari/537.36 EdgA/146.0.3856.97',
+							'Mozilla/5.0 (Linux; Android 10; SM-G973F) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.7680.178 Mobile Safari/537.36 EdgA/146.0.3856.97',
+							'Mozilla/5.0 (Linux; Android 10; HD1913) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.7680.178 Mobile Safari/537.36 EdgA/146.0.3856.97',
+							'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36 Edg/146.0.3856.109',
+							'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36 Edg/146.0.3856.109'
 						   );
 		$userAgent = $array_userAgent[ mt_rand( 0, count( $array_userAgent ) - 1) ];
 		return( $userAgent );
@@ -416,7 +414,7 @@ class wpAppbox_GetAppInfoAPI {
 	* Gibt den Quellcode einer URL zurück
 	*
 	* @since   1.0.0
-	* @change  4.4.20
+	* @change  4.5.11
 	*
 	* @param   string  $appURL              URL der App
 	* @param   string  $javascript_loop     Wie viele JS-Loops [optional]
@@ -434,12 +432,12 @@ class wpAppbox_GetAppInfoAPI {
 		$args = array(
 	        'timeout'    	=> intval( $timeout ),
 	        'redirection'	=> 5,
-	        'sslverify'		=> false,
+	        'sslverify'		=> true,
 	        'headers' 		=> array(
 		        				'Remote_Addr' 		=> esc_attr( $this->getRandomIP() ),
 		        				'X-Forwarded-For' 	=> esc_attr( $this->getRandomIP() ),
 		        				'referer' 			=> esc_url_raw( get_site_url() ),
-		        				'content-encoding' 	=> 'gzip'
+		        				'Accept'          	=> 'text/html,application/xhtml+xml'
       						),
       		'user-agent' 	=> esc_attr( $this->getUserAgent() )
     	);

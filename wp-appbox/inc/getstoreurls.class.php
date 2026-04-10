@@ -116,19 +116,19 @@ $wpAppbox_storeURL = array(
 		'15' => 'https://play.google.com/store/apps/details?id={APPID}&hl=in&gl=id'
 	),
 	'microsoftstore' => array(
-		'1' => 'https://apps.microsoft.com/store/detail/app/{APPID}?hl=de-de&gl=de',
-		'2' => 'https://apps.microsoft.com/store/detail/app/{APPID}?hl=en-us&gl=us',
-		'3' => 'https://apps.microsoft.com/store/detail/app/{APPID}?hl=en-gb&gl=uk',
-		'4' => 'https://apps.microsoft.com/store/detail/app/{APPID}?hl=fr-fr&gl=fr',
-		'5' => 'https://apps.microsoft.com/store/detail/app/{APPID}?hl=es-es&gl=es',
-		'6' => 'https://apps.microsoft.com/store/detail/app/{APPID}?hl=ru-ru&gl=ru',
-		'7' => 'https://apps.microsoft.com/store/detail/app/{APPID}?hl=tr-tr&gl=tr',
-		'8' => 'https://apps.microsoft.com/store/detail/app/{APPID}?hl=it-it&gl=it',
-		'9' => 'https://apps.microsoft.com/store/detail/app/{APPID}?hl=de-at&gl=at',
-		'10' => 'https://apps.microsoft.com/store/detail/app/{APPID}?hl=de-ch&gl=ch',
-		'12' => 'https://apps.microsoft.com/store/detail/app/{APPID}?hl=pl-pl&gl=pl',
-		'14' => 'https://apps.microsoft.com/store/detail/app/{APPID}?hl=zh-cn&gl=cn',
-		'15' => 'https://apps.microsoft.com/store/detail/app/{APPID}?hl=id-id&gl=id'
+		'1' => 'https://apps.microsoft.com/detail/{APPID}?hl=de-de&gl=de',
+		'2' => 'https://apps.microsoft.com/detail/{APPID}?hl=en-us&gl=us',
+		'3' => 'https://apps.microsoft.com/detail/{APPID}?hl=en-gb&gl=uk',
+		'4' => 'https://apps.microsoft.com/detail/{APPID}?hl=fr-fr&gl=fr',
+		'5' => 'https://apps.microsoft.com/detail/{APPID}?hl=es-es&gl=es',
+		'6' => 'https://apps.microsoft.com/detail/{APPID}?hl=ru-ru&gl=ru',
+		'7' => 'https://apps.microsoft.com/detail/{APPID}?hl=tr-tr&gl=tr',
+		'8' => 'https://apps.microsoft.com/detail/{APPID}?hl=it-it&gl=it',
+		'9' => 'https://apps.microsoft.com/detail/{APPID}?hl=de-at&gl=at',
+		'10' => 'https://apps.microsoft.com/detail/{APPID}?hl=de-ch&gl=ch',
+		'12' => 'https://apps.microsoft.com/detail/{APPID}?hl=pl-pl&gl=pl',
+		'14' => 'https://apps.microsoft.com/detail/{APPID}?hl=zh-cn&gl=cn',
+		'15' => 'https://apps.microsoft.com/detail/{APPID}?hl=id-id&gl=id'
 	),
 	'operaaddons' => array(
 		'1' => 'https://addons.opera.com/de/extensions/details/{APPID}/',
