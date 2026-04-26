@@ -19,14 +19,14 @@ class Cached_Apps extends WP_List_Table {
 	* Prüfen ob eine Suche aktiv ist
 	*
 	* @since   3.0.0
-	* @change  3.2.0
+	* @change  4.5.12
 	*
 	* @return  boolean  true/false  TRUE when active
 	*/
 	
 	function isActiveSearch() {
-		if ( isset( $_POST['cacheSearch'] ) && '' != trim( $_POST['cacheSearch'] ) ) return( true );
-		else( false );
+		if ( isset( $_POST['cacheSearch'] ) && '' != trim( $_POST['cacheSearch'] ) ) return true;
+		else return false;
 	}
 	
 	
@@ -34,14 +34,14 @@ class Cached_Apps extends WP_List_Table {
 	* Prüfen ob ein Filter aktiv ist
 	*
 	* @since   4.1.13
-	* @change  n/a
+	* @change  4.5.12
 	*
 	* @return  boolean  true/false  TRUE when active
 	*/
 	
 	function isActiveFilter() {
-		if ( isset( $_POST['cacheStore'] ) && '' != trim( $_POST['cacheStore'] ) ) return( true );
-		else( false );
+		if ( isset( $_POST['cacheStore'] ) && '' != trim( $_POST['cacheStore'] ) ) return true;
+		else return false;
 	}
 	
 		
@@ -256,13 +256,15 @@ class Cached_Apps extends WP_List_Table {
 	* Einträge vorbereiten
 	*
 	* @since   2.0.0
-	* @change  4.4.0
+	* @change  4.5.12
 	*/
 	
 	function prepare_items() {
 		$this->process_bulk_action();
 		if ( $this->isActiveSearch() || $this->isActiveFilter() ) {
-			$apps = $this->fillData( sanitize_text_field( $_POST['cacheSearch'] ), sanitize_text_field( $_POST['cacheStore'] ) );
+			$search = isset( $_POST['cacheSearch'] ) ? sanitize_text_field($_POST['cacheSearch'] ) : '';
+			$store  = isset( $_POST['cacheStore'] ) ? sanitize_text_field($_POST['cacheStore'] ) : '';
+			$this->fillData( $search, $store );
 		} else {
 			$apps = $this->fillData();
 		}
@@ -430,7 +432,7 @@ class Cached_Apps extends WP_List_Table {
 	* Boxen und Textfelder über und unter der Tabelle einbauen
 	*
 	* @since   3.0.0
-	* @change  4.5.8
+	* @change  4.5.12
 	*
 	* @param   string  $which  Über oder unter der Tabelle(top, bottom)
 	* @output  string          HTML-Ausgabe der Optionsfelder
@@ -451,7 +453,7 @@ class Cached_Apps extends WP_List_Table {
 		   	  					asort( $wpAppbox_storeNames );
 		   	  					foreach ( $wpAppbox_storeNames as $storeID => $storeName ):
 		   	  					?>
-		   	  						<option value="<?php esc_attr_e( $storeID ); ?>" <?php selected( $_POST['cacheStore'], $storeID ); ?>><?php esc_attr_e( $storeName); ?></option>
+		   	  						<option value="<?php esc_attr_e( $storeID ); ?>" <?php selected( $_POST['cacheStore'] ?? '', $storeID ); ?>><?php esc_attr_e( $storeName); ?></option>
 		   	  					<?php
 		   	  					endforeach;
 		   	  				endif;
