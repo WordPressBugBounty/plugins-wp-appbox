@@ -36,16 +36,16 @@
 <div class="{WPAPPBOXCSSCLASSES} screenshots">
 	<div class="qrcode"><img src="{QRCODE}" alt="{TITLE_ATTR}" /></div>
 	<div class="appicon">
-		<a href="{APPLINK}"><img src="{ICON}" alt="{TITLE_ATTR}" /></a>
+		<a href="{APPLINK}" aria-label="{TITLE_ATTR}"><img src="{ICON}" alt="{TITLE_ATTR}" /></a>
 	</div>
 	<div class="applinks">
 		<div class="appbuttons">
-			<a href="{APPLINK}">{DOWNLOADCAPTION}</a>
+			<a href="{APPLINK}" aria-label="{TITLE_ATTR}">{DOWNLOADCAPTION}</a>
 			<span onMouseOver="jQuery('.wpappbox-{APPIDHASH} .qrcode').show();" onMouseOut="jQuery('.wpappbox-{APPIDHASH} .qrcode').hide();">QR-Code</span>
 		</div>
 	</div>
 	<div class="appdetails">
-		<div class="apptitle">{RELOADLINK}<a href="{APPLINK}" class="apptitle">{TITLE}</a></div>
+		<div class="apptitle">{RELOADLINK}<a href="{APPLINK}" class="apptitle" aria-label="{TITLE_ATTR}">{TITLE}</a></div>
 		<div class="developer">
 			<span class="label"><?php _e('Developer', 'wp-appbox'); ?>: </span>
 			<span class="value">{DEVELOPERLINK}</span>

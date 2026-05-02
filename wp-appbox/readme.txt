@@ -4,7 +4,7 @@ Donate link: https://www.paypal.me/marcelismus
 Tags: app store, google play, microsoft store, apps, appbox
 Requires at least: 5.0
 Tested up to: 6.9.0
-Stable tag: 4.5.12
+Stable tag: 4.5.13
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0
 
@@ -142,7 +142,7 @@ A first implementation is available. However, this is experimental in nature and
 
 == Changelog ==
 
-= 4.5.9 - 4.5.12 =
+= 4.5.9 - 4.5.13 =
 * Fixed: Various bugs
 
 = 4.5.8 =

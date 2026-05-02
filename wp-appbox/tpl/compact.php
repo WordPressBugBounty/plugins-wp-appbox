@@ -35,11 +35,11 @@
 
 <div class="{WPAPPBOXCSSCLASSES} compact">
 	<div class="appicon">
-		<a href="{APPLINK}"><img src="{ICON}" alt="{TITLE_ATTR}" /></a>
+		<a href="{APPLINK}" aria-label="{TITLE_ATTR}"><img src="{ICON}" alt="{TITLE_ATTR}" /></a>
 	</div>
-	<a class="applinks" href="{APPLINK}"></a>
+	<a class="applinks" href="{APPLINK}" aria-label="{TITLE_ATTR}"></a>
 	<div class="appdetails">
-		<div class="apptitle">{RELOADLINK}<a href="{APPLINK}" class="apptitle">{TITLE}</a></div>
+		<div class="apptitle">{RELOADLINK}<a href="{APPLINK}" class="apptitle" aria-label="{TITLE_ATTR}">{TITLE}</a></div>
 		<div class="price">
 			<span class="label"><?php _e('Price', 'wp-appbox'); ?>: </span>
 			<span class="value">{PRICE}</span> 

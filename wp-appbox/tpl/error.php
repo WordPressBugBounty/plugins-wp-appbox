@@ -34,8 +34,8 @@
 	<div class="appdetails">
 		<div class="title">{RELOADLINK}{ERRORMSG} :-(</div>
 		<div class="buttons">
-			<a href="{APPLINK}"><?php _e( 'Go to store', 'wp-appbox' ); ?></a>
-			<a href="{GOOGLESEARCH}"><?php _e( 'Google websearch', 'wp-appbox' ); ?></a>
+			<a href="{APPLINK}" aria-label="{TITLE_ATTR}"><?php _e( 'Go to store', 'wp-appbox' ); ?></a>
+			<a href="{GOOGLESEARCH}" aria-label="<?php _e( 'Google websearch', 'wp-appbox' ); ?>"><?php _e( 'Google websearch', 'wp-appbox' ); ?></a>
 		</div>
 	</div>
 </div>

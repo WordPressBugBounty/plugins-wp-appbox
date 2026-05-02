@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: WP-Appbox
-Version: 4.5.12
+Version: 4.5.13
 Plugin URI: https://tchgdns.de/wp-appbox-app-badge-fuer-google-play-mac-app-store-windows-store-windows-phone-store-co/
 Description: With WP-Appbox you can add beautiful mobile app badges to your WordPress posts and pages simply by adding a shortcode.
 Author: Marcel Schmilgeit
@@ -43,7 +43,7 @@ defined( 'ABSPATH' ) or exit( 'Nothing to see here' ); // Exit if accessed direc
 global $wpdb;
 define( 'WPAPPBOX_MIN_PHPVERSION', '7.4' );
 define( 'WPAPPBOX_PLUGIN_NAME', 'WP-Appbox' ); 
-define( 'WPAPPBOX_PLUGIN_VERSION', '4.5.12' );
+define( 'WPAPPBOX_PLUGIN_VERSION', '4.5.13' );
 define( 'WPAPPBOX_DB_VERSION', '1.0.4' );
 define( 'WPAPPBOX_PREFIX', 'wpAppbox_' );
 define( 'WPAPPBOX_TABLE_NAME', 'appbox' );
@@ -228,10 +228,10 @@ function wpAppbox_forceNewCache( $cacheID ) {
 
 function wpAppbox_loadTemplate( $styleName, $themeTemplate = false ) {
 	ob_start();
-	if ( file_exists( get_template_directory() . "/wpappbox-$styleName.php" ) ):
-		include( get_template_directory()."/wpappbox-$styleName.php" );
-	elseif ( file_exists( get_template_directory() . "/wpappbox/$styleName.php" ) ):
-		include( get_template_directory()."/wpappbox/$styleName.php" );
+	if ( file_exists( get_stylesheet_directory() . "/wpappbox-$styleName.php" ) ):
+		include( get_stylesheet_directory()."/wpappbox-$styleName.php" );
+	elseif ( file_exists( get_stylesheet_directory() . "/wpappbox/$styleName.php" ) ):
+		include( get_stylesheet_directory()."/wpappbox/$styleName.php" );
 	elseif ( file_exists( plugin_dir_path( __FILE__ ) . "tpl/$styleName.php" ) ):
 		include( "tpl/$styleName.php" );
 	else:
